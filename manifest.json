@@ -1,0 +1,19 @@
+{
+  "name": "Cyber-Breach MR : Jeu Complet Meta Quest 3",
+  "short_name": "CyberBreach MR",
+  "description": "Jeu complet Mixed Reality pour Meta Quest 3 avec Scan 3D des Murs/Bureau, Corps Complet IK (Mains, Bras, Jambes) et 4 Niveaux.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#050814",
+  "theme_color": "#00f7ff",
+  "xr_type": "immersive-ar",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%23060919'/%3E%3Ccircle cx='256' cy='256' r='190' fill='none' stroke='%2300f7ff' stroke-width='28'/%3E%3Ccircle cx='256' cy='256' r='110' fill='%23ff007f'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
