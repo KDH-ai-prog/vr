@@ -2,111 +2,122 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meta Quest 3 — Horizon Mixed Reality Suite (Portails Muraux 3D, Physique Grab & Throw, Drones, Planétarium)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#00f7ff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>CYBER-BREACH MR — Jeu Complet Meta Quest 3 (Level 1-4, Full-Body Avatar IK, Scan 3D Murs & Bureau)</title>
   <style>
     :root {
-      --bg: #050811;
-      --panel: rgba(12, 18, 34, 0.88);
-      --border: rgba(56, 189, 248, 0.35);
-      --cyan: #00f2fe;
-      --purple: #a855f7;
-      --pink: #ec4899;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --text: #f8fafc;
-      --muted: #94a3b8;
+      --bg: #040611;
+      --panel: rgba(8, 12, 28, 0.90);
+      --cyan: #00f7ff;
+      --magenta: #ff007f;
+      --lime: #00ff88;
+      --gold: #ffbe0b;
+      --violet: #9d4edd;
+      --text: #ffffff;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; user-select: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; user-select: none; }
     body { background: var(--bg); color: var(--text); overflow: hidden; width: 100vw; height: 100vh; display: flex; flex-direction: column; }
 
     header {
       height: 58px;
-      background: linear-gradient(90deg, #060b18 0%, #111a30 50%, #090d1a 100%);
-      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, #050716 0%, #140b2e 50%, #050716 100%);
+      border-bottom: 2px solid var(--cyan);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 18px; z-index: 30;
+      box-shadow: 0 4px 25px rgba(0, 247, 255, 0.25);
     }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 15px; letter-spacing: 0.3px; }
-    .badge-mr {
-      background: linear-gradient(135deg, #00f2fe 0%, #7c3aed 55%, #ec4899 100%);
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 15px; letter-spacing: 0.5px; }
+    .badge-vivid {
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 50%, var(--magenta) 100%);
       color: #fff; padding: 5px 12px; border-radius: 8px; font-size: 11.5px; font-weight: 900;
-      box-shadow: 0 0 18px rgba(0, 242, 254, 0.45);
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
     }
     .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .btn {
-      background: rgba(30, 41, 59, 0.85); color: var(--text); border: 1px solid #334155;
-      padding: 7px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      background: rgba(20, 28, 52, 0.9); color: #fff; border: 1.5px solid rgba(0, 247, 255, 0.45);
+      padding: 7px 13px; border-radius: 9px; font-size: 12px; font-weight: 800;
       cursor: pointer; transition: all 0.16s; display: inline-flex; align-items: center; gap: 6px;
     }
-    .btn:hover { background: #334155; border-color: var(--cyan); transform: translateY(-1px); }
-    .btn.active { background: linear-gradient(135deg, #0284c7, #2563eb); border-color: var(--cyan); box-shadow: 0 0 14px rgba(0, 242, 254, 0.4); }
-    .btn-quest-hero {
-      background: linear-gradient(135deg, #00f2fe 0%, #6366f1 50%, #ec4899 100%);
-      border: 1px solid #a5f3fc; color: #fff; font-weight: 900; font-size: 13px; padding: 8px 16px;
-      box-shadow: 0 0 22px rgba(0, 242, 254, 0.55);
-      animation: pulseGlow 2s infinite ease-in-out;
+    .btn:hover { background: #1e293b; border-color: var(--cyan); transform: translateY(-1px); box-shadow: 0 0 15px rgba(0, 247, 255, 0.4); }
+    .btn.active { background: linear-gradient(135deg, #00b4d8, #7209b7); border-color: var(--lime); box-shadow: 0 0 18px rgba(0, 255, 136, 0.5); }
+
+    .btn-play-mr {
+      background: linear-gradient(135deg, #00f7ff 0%, #ff007f 55%, #ffbe0b 100%);
+      border: 2px solid #ffffff; color: #040611; font-weight: 900; font-size: 13.5px; padding: 8px 18px;
+      box-shadow: 0 0 28px rgba(255, 0, 127, 0.75);
+      animation: vividPulse 1.8s infinite ease-in-out;
     }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 16px rgba(0, 242, 254, 0.5); }
-      50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.9); }
+    @keyframes vividPulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(0, 247, 255, 0.7), 0 0 32px rgba(255, 0, 127, 0.5); transform: scale(1); }
+      50% { box-shadow: 0 0 32px rgba(255, 190, 11, 0.95), 0 0 48px rgba(255, 0, 127, 0.9); transform: scale(1.03); }
     }
 
-    .main-stage { flex: 1; position: relative; overflow: hidden; }
-    #xr-canvas { width: 100%; height: 100%; display: block; cursor: grab; }
-    #xr-canvas:active { cursor: grabbing; }
+    .stage { flex: 1; position: relative; overflow: hidden; }
+    #game-canvas { width: 100%; height: 100%; display: block; cursor: crosshair; }
 
-    /* Barre flottante des 5 Expériences Mixed Reality */
-    .exp-dock {
-      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-      background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
-      padding: 8px 12px; display: flex; gap: 8px; z-index: 25;
-      backdrop-filter: blur(12px); box-shadow: 0 15px 45px rgba(0,0,0,0.75);
-      flex-wrap: wrap; justify-content: center; max-width: 96vw;
+    /* HUD Gauche : État du Jeu, Niveau, Corps IK & Scan 3D */
+    .game-hud {
+      position: absolute; top: 16px; left: 16px; width: 340px;
+      background: var(--panel); border: 1.5px solid var(--cyan); border-radius: 14px;
+      padding: 14px 16px; z-index: 20; backdrop-filter: blur(12px);
+      display: flex; flex-direction: column; gap: 9px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.8), 0 0 25px rgba(0, 247, 255, 0.18);
     }
-
-    /* Panneau d'aide & Contrôles rapides à gauche */
-    .side-hud {
-      position: absolute; top: 16px; left: 16px; width: 320px;
-      background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px; z-index: 20; backdrop-filter: blur(10px);
-      display: flex; flex-direction: column; gap: 10px;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.65);
-    }
-    .hud-title {
-      font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;
-      color: var(--cyan); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px;
+    .hud-header {
+      font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.8px;
+      color: var(--cyan); border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 6px;
       display: flex; justify-content: space-between; align-items: center;
     }
-    .stat-row { display: flex; justify-content: space-between; font-size: 12px; color: #cbd5e1; }
-    .stat-val { font-family: 'Consolas', monospace; font-weight: 800; color: var(--cyan); }
+    .level-banner {
+      background: linear-gradient(90deg, rgba(255,0,127,0.28), rgba(0,247,255,0.22));
+      border: 1px solid var(--magenta); border-radius: 9px; padding: 8px 10px;
+      text-align: center;
+    }
+    .progress-bar-bg {
+      width: 100%; height: 10px; background: #090d1e; border-radius: 6px; overflow: hidden;
+      border: 1px solid #334155; margin-top: 5px;
+    }
+    .progress-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--lime), var(--gold));
+      transition: width 0.25s;
+    }
+    .row { display: flex; justify-content: space-between; font-size: 12px; color: #e2e8f0; }
+    .val { font-family: 'Consolas', monospace; font-weight: 900; color: var(--lime); }
 
-    /* Bannière Géante Auto-Détectée sur Meta Quest 3 */
-    .quest-launch-card {
-      position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(8, 13, 26, 0.94); border: 2px solid var(--cyan); border-radius: 20px;
-      padding: 28px 34px; z-index: 50; text-align: center; max-width: 580px; width: 92%;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.92), 0 0 45px rgba(0, 242, 254, 0.35);
+    /* Sélecteur de Niveaux en bas */
+    .level-dock {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: var(--panel); border: 1.5px solid var(--magenta); border-radius: 14px;
+      padding: 8px 12px; display: flex; gap: 8px; z-index: 25;
+      backdrop-filter: blur(12px); box-shadow: 0 15px 45px rgba(0,0,0,0.85);
+      flex-wrap: wrap; justify-content: center; width: max-content; max-width: 96vw;
+    }
+
+    /* Carte Centrale d'Accueil & Installation Application Quest 3 */
+    .hero-card {
+      position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(6, 9, 24, 0.95); border: 2.5px solid var(--cyan); border-radius: 22px;
+      padding: 26px 32px; z-index: 50; text-align: center; max-width: 620px; width: 93%;
+      box-shadow: 0 25px 90px rgba(0,0,0,0.95), 0 0 55px rgba(255, 0, 127, 0.4);
       backdrop-filter: blur(16px);
     }
 
-    /* Modal QR Code & Liens Sans Câble */
-    .modal-backdrop {
-      position: fixed; inset: 0; background: rgba(3, 6, 14, 0.84);
-      backdrop-filter: blur(10px); z-index: 100; display: none;
+    /* Modal d'Installation en Vraie Application sur Meta Quest 3 */
+    .modal-bg {
+      position: fixed; inset: 0; background: rgba(2, 4, 12, 0.88);
+      backdrop-filter: blur(12px); z-index: 100; display: none;
       align-items: center; justify-content: center; padding: 16px;
     }
-    .modal-box {
-      background: #0b1325; border: 1px solid var(--cyan); border-radius: 16px;
-      max-width: 700px; width: 100%; padding: 22px 26px;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.9), 0 0 35px rgba(0, 242, 254, 0.25);
-    }
-    .link-pill {
-      background: #040710; border: 1px solid #334155; border-radius: 8px;
-      padding: 10px 14px; font-family: 'Consolas', monospace; font-size: 14px;
-      color: var(--cyan); font-weight: 700; display: flex; align-items: center;
-      justify-content: space-between; gap: 10px; margin-top: 6px; word-break: break-all;
+    .modal-card {
+      background: #090e22; border: 2px solid var(--cyan); border-radius: 18px;
+      max-width: 680px; width: 100%; padding: 22px 26px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 40px rgba(0, 247, 255, 0.3);
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -116,179 +127,178 @@
 
   <header>
     <div class="brand">
-      <span class="badge-mr">META QUEST 3 • MIXED REALITY LAB</span>
-      <span>Portails Muraux 3D • Physique Grab & Throw • Invasion Drones • Planétarium • Pinceau Lumière</span>
+      <span class="badge-vivid">CYBER-BREACH MR • VIVID EDITION</span>
+      <span>Jeu Complet Meta Quest 3 (4 Niveaux • Corps Complet IK Jambes/Mains • Scan 3D Murs & Bureau)</span>
     </div>
     <div class="top-actions">
-      <button class="btn btn-quest-hero" id="btn-enter-mr" onclick="launchQuestMR('immersive-ar')">
-        🥽 ENTRER EN MIXED REALITY (Passthrough Quest 3)
+      <button class="btn btn-play-mr" id="btn-start-mr" onclick="startFullGameMR('immersive-ar')">
+        🥽 JOUER EN MIXED REALITY (PLEIN ÉCRAN 360°)
       </button>
-      <button class="btn active" onclick="openLinkModal()">
-        📱 Lien & QR Code Quest 3
+      <button class="btn active" onclick="openInstallModal()">
+        📲 Installer comme App sur Quest 3
       </button>
-      <button class="btn" id="btn-gravity" onclick="toggleGravityMode()">
-        🌍 Gravité : Terrestre (9.81 m/s²)
+      <button class="btn" id="btn-weapons" onclick="cycleWeaponMode()">
+        ⚔️ Arme : Canons Plasma + Sabres Néon
       </button>
-      <button class="btn" onclick="CyclePortalDimension()">
-        🌀 Changer Monde Fenêtre
+      <button class="btn" id="btn-room-scan" onclick="toggleRoomScanGrid()">
+        🧱 Maillage 3D Murs/Bureau : ON
       </button>
-      <button class="btn" id="btn-sound" onclick="toggleSound()">
-        🔊 Audio 3D : ON
+      <button class="btn" id="btn-audio" onclick="toggleAudio()">
+        🔊 Musique & SFX : ON
       </button>
     </div>
   </header>
 
-  <main class="main-stage" id="stage">
-    <canvas id="xr-canvas"></canvas>
+  <main class="stage" id="stage">
+    <canvas id="game-canvas"></canvas>
 
-    <!-- HUD Gauche : Statistiques & Actions Interactives -->
-    <aside class="side-hud">
-      <div class="hud-title">
-        <span>⚡ Suite Interactive Quest 3</span>
-        <span id="quest-badge-live" style="color:#34d399;font-size:10.5px;">● PRÊT</span>
+    <!-- HUD du Jeu Complet -->
+    <aside class="game-hud">
+      <div class="hud-header">
+        <span>🎮 CYBER-BREACH MR</span>
+        <span style="color:var(--lime);font-size:11px;">● CORPS IK + MURS 3D</span>
       </div>
 
-      <div class="stat-row"><span>Expérience Active :</span><span class="stat-val" id="stat-exp">Toutes (Hub Complet)</span></div>
-      <div class="stat-row"><span>Dimension Fenêtre Murale :</span><span class="stat-val" id="stat-portal">Saturne & Station Sci-Fi</span></div>
-      <div class="stat-row"><span>Score Tirs / Portail / Panier :</span><span class="stat-val" id="stat-score" style="color:#facc15;">0 pts</span></div>
-      <div class="stat-row"><span>Objets Physiques 3D :</span><span class="stat-val" id="stat-objs">22 actifs</span></div>
-
-      <div style="font-size:11.5px;color:#cbd5e1;line-height:1.45;background:rgba(15,23,42,0.8);padding:9px;border-radius:8px;border:1px solid #1e293b;">
-        <b>🖐️ Dans le Meta Quest 3 (Mains ou Manettes) :</b><br/>
-        • <b>Attraper & Lancer :</b> Visez ou touchez une sphère/cube/planète + maintenez <b>Gâchette / Pincement</b>, puis lancez votre bras !<br/>
-        • <b>Tirer un Orbe Plasma :</b> Appuyez vite sur la <b>Gâchette</b> dans le vide pour tirer à travers la fenêtre ou sur les drones !<br/>
-        • <b>Déplacer la Fenêtre sur votre vrai mur :</b> Appuyez sur le bouton <b>Grip (Squeeze)</b> !
+      <div class="level-banner">
+        <div id="hud-lvl-title" style="font-size:14px;font-weight:900;color:var(--gold);">
+          LEVEL 1 — BRÈCHE CRISTALLINE
+        </div>
+        <div id="hud-lvl-sub" style="font-size:11px;color:#e2e8f0;margin-top:2px;">
+          Détruisez les cristaux & cibles (Mains, Pieds, Balles ou Lasers)
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="hud-lvl-bar"></div>
+        </div>
       </div>
 
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button class="btn" style="flex:1;justify-content:center;" onclick="shootPlasmaFromCamera()">
-          ☄️ Tirer Orbe (Espace)
-        </button>
-        <button class="btn" style="flex:1;justify-content:center;" onclick="respawnPhysicsPlayground()">
-          🧱 Réempiler Objets
-        </button>
+      <div class="row"><span>Score Total :</span><span class="val" id="hud-score" style="color:var(--gold);font-size:14px;">0 PTS</span></div>
+      <div class="row"><span>Bouclier Joueur (Santé) :</span><span class="val" id="hud-hp" style="color:var(--lime);">100 %</span></div>
+      <div class="row"><span>Avatar Corporel 3D :</span><span class="val" style="color:var(--cyan);">Mains + Bras + Torse + Jambes</span></div>
+      <div class="row"><span>Scan 3D Chambre :</span><span class="val" id="hud-scan">Murs + Bureau + Sol Actifs</span></div>
+
+      <div style="font-size:11px;color:#cbd5e1;line-height:1.45;background:rgba(15,23,42,0.85);padding:9px;border-radius:8px;border:1px solid rgba(0,247,255,0.25);">
+        <b>🧍 Votre Corps Complet dans le Jeu :</b><br/>
+        • <b>Baissez la tête :</b> Voyez votre **Torse d'Armure, vos Bras et vos Jambes/Pieds** qui marchent quand vous bougez !<br/>
+        • <b>Mains & Pieds actifs :</b> Frappez les sphères au poing, donnez des **coups de pied** dans les balles au sol, tranchez au **Sabre Néon** ou tirez avec la **Gâchette** !<br/>
+        • <b>Vrais Murs & Bureau :</b> Les balles rebondissent sur vos vrais murs et votre bureau avec des ondes de choc Vivid !
       </div>
     </aside>
 
-    <!-- Carte Centrale de Lancement Rapide pour Meta Quest 3 -->
-    <div class="quest-launch-card" id="quest-welcome-card">
-      <div style="font-size:12.5px;font-weight:900;color:var(--cyan);letter-spacing:1.2px;margin-bottom:6px;">
-        ✨ EXPÉRIENCE MIXED REALITY HAUTE FIDÉLITÉ — GEMINI 4 ARGON × META QUEST 3
+    <!-- Carte Centrale de Lancement Plein Écran 360° -->
+    <div class="hero-card" id="welcome-card">
+      <div style="font-size:12.5px;font-weight:900;color:var(--cyan);letter-spacing:1.4px;margin-bottom:6px;">
+        ⚡ JEU COMPLET MIXED REALITY — 4 NIVEAUX + CORPS COMPLET IK + SCAN 3D MURS/BUREAU
       </div>
-      <div style="font-size:21px;font-weight:900;color:#fff;margin-bottom:10px;">
-        Ouvrez une Fenêtre 3D dans votre Vrai Mur & Manipulez la Physique !
+      <div style="font-size:23px;font-weight:900;color:#fff;margin-bottom:10px;text-shadow:0 0 20px rgba(255,0,127,0.7);">
+        CYBER-BREACH MR : VIVID EDITION
       </div>
-      <div style="font-size:13px;color:#cbd5e1;line-height:1.55;margin-bottom:18px;text-align:left;background:rgba(15,23,42,0.75);padding:12px 16px;border-radius:12px;border:1px solid #1e293b;">
-        🪟 <b>1. Fenêtre Dimensionnelle Murale (Stencil/Depth Portal) :</b> Regardez à travers votre vrai mur vers une station orbitale et Saturne en 3D profonde !<br/>
-        🎾 <b>2. Physique Grab & Throw Réaliste :</b> Attrapez des sphères, cristaux et cubes avec vos mains, lancez-les contre la pyramide, dans le panier holographique ou <i>à travers la fenêtre du mur</i> !<br/>
-        🛸 <b>3. Invasion de Drones, Planétarium Tactile & Pinceau Lumière 3D !</b>
+      <div style="font-size:13px;color:#e2e8f0;line-height:1.55;margin-bottom:18px;text-align:left;background:rgba(14,20,42,0.88);padding:13px 16px;border-radius:12px;border:1px solid var(--magenta);">
+        🧍 <b>1. Corps Complet 3D (Tête, Bras, Mains, Torse & Jambes qui marchent) :</b> Vos mains saisissent/tranchent et vos pieds frappent réellement les objets au sol !<br/>
+        🧱 <b>2. Vrais Murs, Vrai Bureau & Portail 3D :</b> Scan 3D de votre pièce (`mesh-detection` / `plane-detection` + LiDAR) — les balles rebondissent sur vos murs et votre bureau !<br/>
+        🏆 <b>3. 4 Niveaux Progressifs (Level 1 → Level 2 → Level 3 Zéro-G → Level 4 Boss Titan) !</b><br/>
+        📲 <b>4. Mode Application Plein Écran (Sans Navigateur) :</b> Dès que vous cliquez ci-dessous, la fenêtre du navigateur disparaît à 100 % !
       </div>
+
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <button class="btn btn-quest-hero" style="font-size:16px;padding:15px 22px;justify-content:center;border-radius:12px;" onclick="launchQuestMR('immersive-ar')">
-          🚀 LANCER EN MIXED REALITY (PASSTHROUGH COULEUR)
+        <button class="btn btn-play-mr" style="font-size:16.5px;padding:16px 24px;justify-content:center;border-radius:13px;" onclick="startFullGameMR('immersive-ar')">
+          🚀 JOUER MAINTENANT EN MIXED REALITY (SANS FENÊTRE NAVIGATEUR)
         </button>
-        <div style="display:flex;gap:8px;">
-          <button class="btn active" style="flex:1;justify-content:center;padding:10px;" onclick="openLinkModal()">
-            📱 Afficher Lien & QR Code pour mon Quest 3
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn active" style="flex:1;justify-content:center;padding:10px;" onclick="openInstallModal()">
+            📲 Comment l'installer en Application sur Quest 3
           </button>
-          <button class="btn" style="padding:10px 16px;" onclick="document.getElementById('quest-welcome-card').style.display='none'">
-            Explorer sur PC (Souris)
+          <button class="btn" style="padding:10px 16px;" onclick="document.getElementById('welcome-card').style.display='none'">
+            Tester sur Écran 2D
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Barre Inférieure : Sélection des 5 Expériences -->
-    <div class="exp-dock">
-      <button class="btn active" id="exp-btn-all" onclick="setExperienceMode('all')">
-        🌟 1. Tout Activer (Hub MR Complet)
+    <!-- Barre de sélection directe des 4 Niveaux -->
+    <div class="level-dock">
+      <button class="btn active" id="lvl-btn-1" onclick="startLevel(1)">
+        🥇 LEVEL 1 : Brèche & Cristaux (Bureau/Murs)
       </button>
-      <button class="btn" id="exp-btn-portal" onclick="setExperienceMode('portal')">
-        🪟 2. Double Fenêtre Murale 3D (Portails)
+      <button class="btn" id="lvl-btn-2" onclick="startLevel(2)">
+        🥈 LEVEL 2 : Assaut des Sentinelles
       </button>
-      <button class="btn" id="exp-btn-physics" onclick="setExperienceMode('physics')">
-        🎾 3. Physique : Attraper, Lancer & Chamboule-Tout
+      <button class="btn" id="lvl-btn-3" onclick="startLevel(3)">
+        🥉 LEVEL 3 : Tempête Zéro-G & Sabres Néon
       </button>
-      <button class="btn" id="exp-btn-drones" onclick="setExperienceMode('drones')">
-        🛸 4. Invasion de Drones (Tir & Explosions)
-      </button>
-      <button class="btn" id="exp-btn-solar" onclick="setExperienceMode('solar')">
-        🪐 5. Système Solaire Tactile (Attraper Planètes)
-      </button>
-      <button class="btn" id="exp-btn-paint" onclick="setExperienceMode('paint')">
-        🎨 6. Peinture Néon 3D dans l'Air
+      <button class="btn" id="lvl-btn-4" onclick="startLevel(4)">
+        👑 LEVEL 4 : BOSS FINAL (Titan Dimensionnel)
       </button>
     </div>
   </main>
 
-  <!-- MODAL LIEN DIRECT & QR CODE (PORT DÉDIÉ 9090 / 9443) -->
-  <div class="modal-backdrop" id="link-modal" onclick="if(event.target===this) closeLinkModal()">
-    <div class="modal-box">
+  <!-- MODAL D'INSTALLATION COMME VRAIE APPLICATION SUR META QUEST 3 -->
+  <div class="modal-bg" id="install-modal" onclick="if(event.target===this) closeInstallModal()">
+    <div class="modal-card">
       <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b;padding-bottom:10px;margin-bottom:14px;">
         <div style="font-size:16px;font-weight:900;color:var(--cyan);">
-          🥽 Ouvrir cette Expérience Mixed Reality sur votre Meta Quest 3
+          📲 Installer CYBER-BREACH MR comme Application sur votre Meta Quest 3
         </div>
-        <button class="btn" onclick="closeLinkModal()">✖ Fermer</button>
+        <button class="btn" onclick="closeInstallModal()">✖ Fermer</button>
       </div>
 
-      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
-        <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:12px;">
-          <div style="background:rgba(16,185,129,0.12);border:1px solid #10b981;border-radius:10px;padding:10px 14px;font-size:12.5px;line-height:1.5;">
-            <b>⚠️ Pourquoi <code>localhost:9090</code> ne marche pas dans le casque ?</b><br/>
-            Dans le casque Quest 3, <code>localhost</code> désigne le casque lui-même (et non votre PC).<br/>
-            <b>👉 Tapez plutôt ce lien ultra-court dans le navigateur du Meta Quest 3 :</b>
-          </div>
-
-          <div>
-            <div style="font-size:12px;font-weight:800;color:#facc15;">
-              ⭐ Méthode 1 (LA PLUS SIMPLE) — Lien Court Permanent (Tapez juste ceci dans le Quest 3) :
-            </div>
-            <div class="link-pill" style="border-color:#facc15;font-size:16px;">
-              <span id="url-short" style="color:#facc15;">https://tinyurl.com/24gv6x99</span>
-              <button class="btn active" style="padding:4px 10px;font-size:11px;" onclick="copyUrl('url-short')">Copier</button>
-            </div>
-          </div>
-
-          <div>
-            <div style="font-size:12px;font-weight:800;color:#34d399;">
-              🌐 Méthode 2 — Lien Direct Permanent GitHub Pages HTTPS :
-            </div>
-            <div class="link-pill">
-              <span id="url-cloud">https://kdh-ai-prog.github.io/vr/</span>
-              <button class="btn active" style="padding:4px 10px;font-size:11px;" onclick="copyUrl('url-cloud')">Copier</button>
-            </div>
-          </div>
-
-          <div>
-            <div style="font-size:12px;font-weight:800;color:var(--cyan);">
-              ⚡ Méthode 3 — Wi-Fi Local Direct de votre PC :
-            </div>
-            <div class="link-pill">
-              <span id="url-local">https://192.168.1.48:9443</span>
-              <button class="btn active" style="padding:4px 10px;font-size:11px;" onclick="copyUrl('url-local')">Copier</button>
-            </div>
-          </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.55;color:#e2e8f0;">
+        <div style="background:rgba(0,255,136,0.12);border:1px solid var(--lime);border-radius:10px;padding:12px 14px;">
+          <b>✨ Pourquoi vous n'êtes PAS bloqué dans une fenêtre de navigateur :</b><br/>
+          Dès que vous cliquez sur le bouton <b>« 🚀 JOUER MAINTENANT EN MIXED REALITY »</b>, le Meta Quest 3 bascule en <b>Mode Immersif Natif 360° (`immersive-ar`)</b> : la barre d'adresse et la fenêtre du navigateur disparaissent à 100 % et le jeu entoure tout votre corps dans votre vraie pièce !
         </div>
 
-        <div style="display:flex;flex-direction:column;align-items:center;background:#fff;padding:12px;border-radius:14px;min-width:190px;">
-          <img id="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=6&data=https%3A%2F%2Fkdh-ai-prog.github.io%2Fvr%2F" alt="QR Code Quest 3" style="width:170px;height:170px;display:block;border-radius:6px;" />
-          <div style="color:#090d16;font-size:11px;font-weight:800;margin-top:6px;text-align:center;">
-            Scannez pour ouvrir<br/>sur Meta Quest 3
-          </div>
+        <div style="background:rgba(0,247,255,0.1);border:1px solid var(--cyan);border-radius:10px;padding:12px 14px;">
+          <b>📲 Comment ajouter l'icône du jeu dans votre Bibliothèque d'Applications Quest 3 (WebApp PWA) :</b><br/>
+          1. Dans votre casque Meta Quest 3, ouvrez toujours le même lien : <b style="color:var(--gold);">tinyurl.com/24gv6x99</b><br/>
+          2. Cliquez sur le bouton ci-dessous <b>« 📥 Installer l'Application Maintenant »</b> (ou cliquez sur l'icône <b>« + / Installer »</b> à droite de la barre d'adresse du navigateur Meta Quest, ou Menu <b>⋮ → Ajouter à l'écran d'accueil / Bibliothèque</b>).<br/>
+          3. Le jeu s'ouvre alors dans sa propre fenêtre dédiée <b>sans barre d'onglets</b> et fonctionne même hors-ligne !
+        </div>
+
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-play-mr" style="flex:1;justify-content:center;padding:12px;" onclick="triggerPWAInstall()">
+            📥 Installer l'Application Maintenant (PWA)
+          </button>
+          <button class="btn active" style="padding:12px 18px;" onclick="closeInstallModal(); startFullGameMR('immersive-ar');">
+            🥽 Lancer Plein Écran 360°
+          </button>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    // Enregistrement du Service Worker pour rendre l'application installable (PWA) sur Meta Quest 3
+    let deferredInstallPrompt = null;
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+    });
+
+    async function triggerPWAInstall() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+      } else {
+        alert("Dans le navigateur du Meta Quest 3 : cliquez sur le menu (⋮) en haut à droite puis sur « Installer l'application / Ajouter à la bibliothèque » !");
+      }
+    }
+    function openInstallModal() { document.getElementById('install-modal').style.display = 'flex'; }
+    function closeInstallModal() { document.getElementById('install-modal').style.display = 'none'; }
+
     // =========================================================================
-    // 1. SYNTHÉTISEUR AUDIO SPATIAL 3D (SONS DE REBOND, PORTAIL, LASER, EXPLOSION)
+    // 1. SYNTHÉTISEUR AUDIO & EFFETS SONORES ARCADE VIVID
     // =========================================================================
     let audioCtx = null;
-    let soundEnabled = true;
+    let audioEnabled = true;
 
-    function ensureAudio() {
-      if (!soundEnabled) return null;
+    function initAudio() {
+      if (!audioEnabled) return null;
       if (!audioCtx) {
         const AC = window.AudioContext || window.webkitAudioContext;
         if (AC) audioCtx = new AC();
@@ -297,918 +307,975 @@
       return audioCtx;
     }
 
-    function playSynthSFX(type, intensity = 1.0) {
-      const ctx = ensureAudio();
+    function playSFX(type, pitch = 1.0) {
+      const ctx = initAudio();
       if (!ctx) return;
       const now = ctx.currentTime;
 
-      if (type === 'bounce') {
+      if (type === 'shoot') {
         const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        const baseFreq = 140 + Math.min(400, intensity * 65);
-        osc.frequency.setValueAtTime(baseFreq, now);
-        osc.frequency.exponentialRampToValueAtTime(55, now + 0.11);
-        gain.gain.setValueAtTime(Math.min(0.28, intensity * 0.06), now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
-        osc.connect(gain); gain.connect(ctx.destination);
-        osc.start(now); osc.stop(now + 0.12);
-      } else if (type === 'grab') {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(280, now);
-        osc.frequency.exponentialRampToValueAtTime(580, now + 0.09);
-        gain.gain.setValueAtTime(0.14, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
-        osc.connect(gain); gain.connect(ctx.destination);
-        osc.start(now); osc.stop(now + 0.1);
-      } else if (type === 'throw') {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(420, now);
-        osc.frequency.exponentialRampToValueAtTime(140, now + 0.16);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
-        osc.connect(gain); gain.connect(ctx.destination);
-        osc.start(now); osc.stop(now + 0.17);
-      } else if (type === 'laser') {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        const g = ctx.createGain();
         osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(880, now);
-        osc.frequency.exponentialRampToValueAtTime(160, now + 0.14);
-        gain.gain.setValueAtTime(0.16, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
-        osc.connect(gain); gain.connect(ctx.destination);
-        osc.start(now); osc.stop(now + 0.15);
-      } else if (type === 'portal') {
-        [261.6, 329.6, 392.0, 523.2].forEach((freq, idx) => {
+        osc.frequency.setValueAtTime(920 * pitch, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.13);
+        g.gain.setValueAtTime(0.18, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+        osc.connect(g); g.connect(ctx.destination);
+        osc.start(now); osc.stop(now + 0.14);
+      } else if (type === 'saber') {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(180 * pitch, now);
+        osc.frequency.exponentialRampToValueAtTime(420 * pitch, now + 0.12);
+        g.gain.setValueAtTime(0.22, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+        osc.connect(g); g.connect(ctx.destination);
+        osc.start(now); osc.stop(now + 0.14);
+      } else if (type === 'wall_hit') {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(220 * pitch, now);
+        osc.frequency.exponentialRampToValueAtTime(65, now + 0.10);
+        g.gain.setValueAtTime(0.16, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.10);
+        osc.connect(g); g.connect(ctx.destination);
+        osc.start(now); osc.stop(now + 0.11);
+      } else if (type === 'level_up') {
+        [261.6, 329.6, 392.0, 523.2, 659.2].forEach((f, idx) => {
           const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.04);
-          osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + idx * 0.04 + 0.35);
-          gain.gain.setValueAtTime(0.12, now + idx * 0.04);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.04 + 0.36);
-          osc.connect(gain); gain.connect(ctx.destination);
-          osc.start(now + idx * 0.04); osc.stop(now + idx * 0.04 + 0.37);
+          const g = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(f, now + idx * 0.07);
+          g.gain.setValueAtTime(0.20, now + idx * 0.07);
+          g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.35);
+          osc.connect(g); g.connect(ctx.destination);
+          osc.start(now + idx * 0.07); osc.stop(now + idx * 0.07 + 0.36);
         });
-      } else if (type === 'explosion') {
-        const bufSize = ctx.sampleRate * 0.32;
-        const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+      } else if (type === 'explode') {
+        const len = ctx.sampleRate * 0.35;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
         const data = buf.getChannelData(0);
-        for (let i = 0; i < bufSize; i++) {
-          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.08));
-        }
-        const noise = ctx.createBufferSource();
-        noise.buffer = buf;
+        for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.09));
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
         const filter = ctx.createBiquadFilter();
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(650, now);
-        const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.28, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
-        noise.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
-        noise.start(now);
+        filter.frequency.setValueAtTime(750, now);
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.32, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        src.connect(filter); filter.connect(g); g.connect(ctx.destination);
+        src.start(now);
       }
     }
 
-    function toggleSound() {
-      soundEnabled = !soundEnabled;
-      const btn = document.getElementById('btn-sound');
-      btn.textContent = soundEnabled ? '🔊 Audio 3D : ON' : '🔇 Audio 3D : OFF';
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('btn-audio').textContent = audioEnabled ? '🔊 Musique & SFX : ON' : '🔇 Musique & SFX : OFF';
     }
 
     // =========================================================================
-    // 2. INITIALISATION THREE.JS WEBXR (PASSTHROUGH ALPHA + OMBRES DOUCES)
+    // 2. INITIALISATION THREE.JS VIVID HDR + WEBXR PASSTHROUGH
     // =========================================================================
-    const canvas = document.getElementById('xr-canvas');
+    const canvas = document.getElementById('game-canvas');
     const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      stencil: true,
-      powerPreference: 'high-performance'
+      canvas, antialias: true, alpha: true, stencil: true, powerPreference: 'high-performance'
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.35; // Exposition Vivid éclatante !
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.xr.enabled = true;
     renderer.xr.setReferenceSpaceType('local-floor');
 
     const scene = new THREE.Scene();
-    const desktopBg = new THREE.Color(0x060a14);
-    scene.background = desktopBg;
+    const darkStudioColor = new THREE.Color(0x040612);
+    scene.background = darkStudioColor;
 
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.04, 120);
-    camera.position.set(0, 1.55, 1.35);
+    const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.03, 140);
+    camera.position.set(0, 1.60, 1.40);
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 1.25, -1.2);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.06;
 
-    // Éclairage PBR Réaliste
-    const hemiLight = new THREE.HemisphereLight(0xe0f2fe, 0x0f172a, 0.85);
-    scene.add(hemiLight);
+    // Éclairage Vivid multicolore
+    scene.add(new THREE.HemisphereLight(0x80ffdb, 0x240046, 0.95));
+    const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    sunLight.position.set(2.5, 4.8, 2.2);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.set(2048, 2048);
+    scene.add(sunLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1.4);
-    dirLight.position.set(2.5, 4.5, 2.0);
-    dirLight.castShadow = true;
-    dirLight.shadow.mapSize.set(2048, 2048);
-    dirLight.shadow.camera.near = 0.2;
-    dirLight.shadow.camera.far = 15;
-    const sd = 4.0;
-    dirLight.shadow.camera.left = -sd; dirLight.shadow.camera.right = sd;
-    dirLight.shadow.camera.top = sd; dirLight.shadow.camera.bottom = -sd;
-    dirLight.shadow.bias = -0.0005;
-    scene.add(dirLight);
+    const neonPointLight1 = new THREE.PointLight(0x00f7ff, 1.8, 8);
+    neonPointLight1.position.set(-1.2, 1.8, -1.2);
+    scene.add(neonPointLight1);
 
-    // Sol capteur d'ombres transparent (En Passthrough Quest 3, votre vrai sol reçoit les ombres des objets !)
-    const floorShadowCatcher = new THREE.Mesh(
-      new THREE.PlaneGeometry(12, 12),
-      new THREE.ShadowMaterial({ opacity: 0.38 })
-    );
-    floorShadowCatcher.rotation.x = -Math.PI / 2;
-    floorShadowCatcher.receiveShadow = true;
-    scene.add(floorShadowCatcher);
+    const neonPointLight2 = new THREE.PointLight(0xff007f, 1.8, 8);
+    neonPointLight2.position.set(1.2, 1.8, -1.2);
+    scene.add(neonPointLight2);
 
-    // Grille subtile pour le mode PC (masquée en Passthrough AR pour garder la vraie pièce 100% pure)
-    const desktopGrid = new THREE.GridHelper(10, 20, 0x00f2fe, 0x1e293b);
-    desktopGrid.position.y = 0.002;
-    scene.add(desktopGrid);
+    // =========================================================================
+    // 3. SCAN 3D DE LA CHAMBRE (VRAIS MURS, VRAI BUREAU, SOL + ONDES D'IMPACT)
+    // =========================================================================
+    const roomGroup = new THREE.Group();
+    roomGroup.name = 'RealRoom3DMap';
+    scene.add(roomGroup);
 
-    const state = {
-      experience: 'all',
-      portalTheme: 0,
-      zeroGravity: false,
-      score: 0,
-      needsWallCalibration: false
+    const ROOM_BOUNDS = {
+      minX: -1.85, maxX: 1.85,
+      minZ: -1.95, maxZ: 1.65,
+      floorY: 0.0,
+      ceilingY: 2.65,
+      deskX: 0.0, deskY: 0.75, deskZ: -0.85, deskW: 1.25, deskD: 0.62
     };
 
-    function addScore(pts) {
-      state.score += pts;
-      document.getElementById('stat-score').textContent = `${state.score} pts`;
-      drawHolographicWristPanel();
+    // Ombres portées sur votre vrai sol en Passthrough
+    const floorShadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(10, 10),
+      new THREE.ShadowMaterial({ opacity: 0.42 })
+    );
+    floorShadow.rotation.x = -Math.PI / 2;
+    floorShadow.receiveShadow = true;
+    roomGroup.add(floorShadow);
+
+    // Maillage LiDAR Holographique sur vos Murs & votre Bureau (pour voir que la pièce est scannée en 3D !)
+    const lidarScanGroup = new THREE.Group();
+    roomGroup.add(lidarScanGroup);
+
+    function createLiDARWallGrid(w, h, colorHex) {
+      const c = document.createElement('canvas');
+      c.width = 512; c.height = 512;
+      const ctx = c.getContext('2d');
+      ctx.clearRect(0, 0, 512, 512);
+      ctx.strokeStyle = colorHex;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.28;
+      for (let i = 0; i <= 16; i++) {
+        const p = (i / 16) * 512;
+        ctx.beginPath(); ctx.moveTo(p, 0); ctx.lineTo(p, 512); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, p); ctx.lineTo(512, p); ctx.stroke();
+      }
+      const tex = new THREE.CanvasTexture(c);
+      return new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthWrite: false });
+    }
+
+    const leftWallMesh = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 2.65), createLiDARWallGrid(3.6, 2.65, '#00f7ff'));
+    leftWallMesh.position.set(ROOM_BOUNDS.minX, 1.325, -0.15);
+    leftWallMesh.rotation.y = Math.PI / 2;
+    lidarScanGroup.add(leftWallMesh);
+
+    const rightWallMesh = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 2.65), createLiDARWallGrid(3.6, 2.65, '#ff007f'));
+    rightWallMesh.position.set(ROOM_BOUNDS.maxX, 1.325, -0.15);
+    rightWallMesh.rotation.y = -Math.PI / 2;
+    lidarScanGroup.add(rightWallMesh);
+
+    // Bureau Réel Holographique (collider physique + plateau néon transparent sur votre vrai bureau)
+    const realDeskMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(ROOM_BOUNDS.deskW, 0.03, ROOM_BOUNDS.deskD),
+      new THREE.MeshPhysicalMaterial({
+        color: 0x00f7ff, transparent: true, opacity: 0.25, roughness: 0.15, metalness: 0.8
+      })
+    );
+    realDeskMesh.position.set(ROOM_BOUNDS.deskX, ROOM_BOUNDS.deskY, ROOM_BOUNDS.deskZ);
+    realDeskMesh.receiveShadow = true;
+    lidarScanGroup.add(realDeskMesh);
+
+    const deskWire = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(ROOM_BOUNDS.deskW, 0.03, ROOM_BOUNDS.deskD)),
+      new THREE.LineBasicMaterial({ color: 0x00ff88 })
+    );
+    deskWire.position.copy(realDeskMesh.position);
+    lidarScanGroup.add(deskWire);
+
+    // Ondes de choc lumineuses (Ripples) quand une balle ou un tir touche vos vrais murs, votre bureau ou le sol !
+    const wallRipples = [];
+    function spawnWallImpactRipple(pos, normalEuler, colorHex = 0x00f7ff) {
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(0.02, 0.045, 32),
+        new THREE.MeshBasicMaterial({ color: colorHex, side: THREE.DoubleSide, transparent: true, opacity: 0.95 })
+      );
+      ring.position.copy(pos);
+      ring.rotation.copy(normalEuler);
+      scene.add(ring);
+      wallRipples.push({ mesh: ring, scale: 1.0, alpha: 1.0 });
+    }
+
+    function toggleRoomScanGrid() {
+      lidarScanGroup.visible = !lidarScanGroup.visible;
+      document.getElementById('btn-room-scan').textContent =
+        lidarScanGroup.visible ? '🧱 Maillage 3D Murs/Bureau : ON' : '🧱 Maillage 3D Murs/Bureau : OFF';
     }
 
     // =========================================================================
-    // 3. FENÊTRE DIMENSIONNELLE MURALE 3D (DEPTH-MASK PORTAL WINDOW)
-    //    Regardez à travers votre vrai mur vers un autre univers 3D profond !
+    // 4. FENÊTRE DIMENSIONNELLE MURALE 3D + MONDE PROFOND VIVID DERRIÈRE LE MUR
     // =========================================================================
     const portalRoot = new THREE.Group();
-    portalRoot.name = 'WallPortalWindow';
-    // Placée sur le mur en face de vous (Z = -1.85m, centre à Y = 1.40m)
-    portalRoot.position.set(0, 1.40, -1.85);
+    portalRoot.position.set(0, 1.42, ROOM_BOUNDS.minZ);
     scene.add(portalRoot);
 
-    const WIN_W = 1.50; // Largeur de la fenêtre murale : 1m50
-    const WIN_H = 1.70; // Hauteur de la fenêtre murale : 1m70
-    const TUNNEL_W = 8.0;
-    const TUNNEL_H = 6.0;
-    const TUNNEL_D = 22.0;
+    const PORTAL_W = 1.65;
+    const PORTAL_H = 1.80;
+    const DEPTH_W = 9.0, DEPTH_H = 6.5, DEPTH_D = 26.0;
 
-    // MATÉRIAU OCCLUDEUR MAGIQUE (colorWrite: false, depthWrite: true) :
-    // En Mixed Reality (Passthrough), ce matériau est 100% transparent (laisse voir votre VRAI mur)
-    // mais écrit dans le Z-buffer (renderOrder = 1) pour masquer tout l'univers 3D du portail
-    // SAUF à travers l'ouverture exacte de la fenêtre (1.50m x 1.70m) !
-    const depthMaskMat = new THREE.MeshBasicMaterial({
-      colorWrite: false,
-      depthWrite: true,
-      side: THREE.DoubleSide
-    });
-
-    const occluderGroup = new THREE.Group();
-    portalRoot.add(occluderGroup);
-
-    function addMaskPlane(w, h, x, y, z, rx = 0, ry = 0) {
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), depthMaskMat);
-      m.position.set(x, y, z);
-      m.rotation.set(rx, ry, 0);
-      m.renderOrder = 1;
-      occluderGroup.add(m);
+    // Masque de profondeur (laisse voir votre vrai mur autour de la fenêtre en Passthrough !)
+    const maskMat = new THREE.MeshBasicMaterial({ colorWrite: false, depthWrite: true, side: THREE.DoubleSide });
+    function addOccluder(w, h, x, y, z, rx = 0, ry = 0) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), maskMat);
+      m.position.set(x, y, z); m.rotation.set(rx, ry, 0); m.renderOrder = 1;
+      portalRoot.add(m);
     }
+    const bw = 4.0, bh = 2.8;
+    addOccluder(bw, PORTAL_H + bh * 2, -(PORTAL_W / 2 + bw / 2), 0, 0);
+    addOccluder(bw, PORTAL_H + bh * 2,  (PORTAL_W / 2 + bw / 2), 0, 0);
+    addOccluder(PORTAL_W, bh, 0,  (PORTAL_H / 2 + bh / 2), 0);
+    addOccluder(PORTAL_W, bh, 0, -(PORTAL_H / 2 + bh / 2), 0);
+    addOccluder(DEPTH_D, DEPTH_H, -DEPTH_W / 2, 0, -DEPTH_D / 2, 0, Math.PI / 2);
+    addOccluder(DEPTH_D, DEPTH_H,  DEPTH_W / 2, 0, -DEPTH_D / 2, 0, Math.PI / 2);
+    addOccluder(DEPTH_W, DEPTH_D, 0,  DEPTH_H / 2, -DEPTH_D / 2, Math.PI / 2, 0);
+    addOccluder(DEPTH_W, DEPTH_D, 0, -DEPTH_H / 2, -DEPTH_D / 2, Math.PI / 2, 0);
 
-    // 4 panneaux frontaux autour du trou de la fenêtre (créant l'ouverture exacte WIN_W x WIN_H dans votre mur)
-    const borderW = 3.5;
-    const borderH = 2.5;
-    // Gauche et Droite de la fenêtre
-    addMaskPlane(borderW, WIN_H + borderH * 2, -(WIN_W / 2 + borderW / 2), 0, 0);
-    addMaskPlane(borderW, WIN_H + borderH * 2,  (WIN_W / 2 + borderW / 2), 0, 0);
-    // Haut et Bas de la fenêtre
-    addMaskPlane(WIN_W, borderH, 0,  (WIN_H / 2 + borderH / 2), 0);
-    addMaskPlane(WIN_W, borderH, 0, -(WIN_H / 2 + borderH / 2), 0);
-    // Murs extérieurs du caisson pour qu'on puisse regarder la fenêtre de côté sans voir le tunnel dépasser
-    addMaskPlane(TUNNEL_D, TUNNEL_H, -TUNNEL_W / 2, 0, -TUNNEL_D / 2, 0, Math.PI / 2);
-    addMaskPlane(TUNNEL_D, TUNNEL_H,  TUNNEL_W / 2, 0, -TUNNEL_D / 2, 0, Math.PI / 2);
-    addMaskPlane(TUNNEL_W, TUNNEL_D, 0,  TUNNEL_H / 2, -TUNNEL_D / 2, Math.PI / 2, 0);
-    addMaskPlane(TUNNEL_W, TUNNEL_D, 0, -TUNNEL_H / 2, -TUNNEL_D / 2, Math.PI / 2, 0);
+    // Cadre de Fenêtre Cyber-Néon Vivid
+    const frameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.15, metalness: 0.92 });
+    const glowCyanMat = new THREE.MeshBasicMaterial({ color: 0x00f7ff });
+    const glowPinkMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
+    const ft = 0.09, fd = 0.16;
+    const fTop = new THREE.Mesh(new THREE.BoxGeometry(PORTAL_W + ft * 2, ft, fd), frameMat); fTop.position.set(0, PORTAL_H / 2 + ft / 2, 0);
+    const fBot = new THREE.Mesh(new THREE.BoxGeometry(PORTAL_W + ft * 2, ft, fd), frameMat); fBot.position.set(0, -PORTAL_H / 2 - ft / 2, 0);
+    const fL = new THREE.Mesh(new THREE.BoxGeometry(ft, PORTAL_H, fd), frameMat); fL.position.set(-PORTAL_W / 2 - ft / 2, 0, 0);
+    const fR = new THREE.Mesh(new THREE.BoxGeometry(ft, PORTAL_H, fd), frameMat); fR.position.set(PORTAL_W / 2 + ft / 2, 0, 0);
+    portalRoot.add(fTop, fBot, fL, fR);
 
-    // CADRE ARCHITECTURAL NÉON 3D DE LA FENÊTRE SUR VOTRE VRAI MUR
-    const frameGroup = new THREE.Group();
-    portalRoot.add(frameGroup);
+    const gTop = new THREE.Mesh(new THREE.BoxGeometry(PORTAL_W, 0.025, 0.05), glowCyanMat); gTop.position.set(0, PORTAL_H / 2, 0.06);
+    const gBot = new THREE.Mesh(new THREE.BoxGeometry(PORTAL_W, 0.025, 0.05), glowCyanMat); gBot.position.set(0, -PORTAL_H / 2, 0.06);
+    const gL = new THREE.Mesh(new THREE.BoxGeometry(0.025, PORTAL_H, 0.05), glowPinkMat); gL.position.set(-PORTAL_W / 2, 0, 0.06);
+    const gR = new THREE.Mesh(new THREE.BoxGeometry(0.025, PORTAL_H, 0.05), glowPinkMat); gR.position.set(PORTAL_W / 2, 0, 0.06);
+    portalRoot.add(gTop, gBot, gL, gR);
 
-    const frameOuterMat = new THREE.MeshStandardMaterial({
-      color: 0x1e293b, roughness: 0.22, metalness: 0.9, envMapIntensity: 1.5
-    });
-    const frameGlowCyan = new THREE.MeshBasicMaterial({ color: 0x00f2fe });
-    const frameGlowPink = new THREE.MeshBasicMaterial({ color: 0xec4899 });
+    // Monde profond derrière le mur (renderOrder = 2)
+    const deepWorld = new THREE.Group();
+    portalRoot.add(deepWorld);
 
-    const frameThick = 0.09;
-    const frameDepth = 0.14;
-    // Montants Haut, Bas, Gauche, Droite du cadre de fenêtre 3D
-    const topBar = new THREE.Mesh(new THREE.BoxGeometry(WIN_W + frameThick * 2, frameThick, frameDepth), frameOuterMat);
-    topBar.position.set(0, WIN_H / 2 + frameThick / 2, 0);
-    const botBar = new THREE.Mesh(new THREE.BoxGeometry(WIN_W + frameThick * 2 + 0.12, frameThick * 1.3, frameDepth * 1.4), frameOuterMat);
-    botBar.position.set(0, -WIN_H / 2 - frameThick / 2, 0.02);
-    const leftBar = new THREE.Mesh(new THREE.BoxGeometry(frameThick, WIN_H, frameDepth), frameOuterMat);
-    leftBar.position.set(-WIN_W / 2 - frameThick / 2, 0, 0);
-    const rightBar = new THREE.Mesh(new THREE.BoxGeometry(frameThick, WIN_H, frameDepth), frameOuterMat);
-    rightBar.position.set(WIN_W / 2 + frameThick / 2, 0, 0);
-    frameGroup.add(topBar, botBar, leftBar, rightBar);
-
-    // Liserés lumineux Néon autour de l'ouverture de la fenêtre
-    const neonStripH = new THREE.BoxGeometry(WIN_W + 0.02, 0.018, 0.04);
-    const neonStripV = new THREE.BoxGeometry(0.018, WIN_H + 0.02, 0.04);
-    const nTop = new THREE.Mesh(neonStripH, frameGlowCyan); nTop.position.set(0, WIN_H / 2, 0.05);
-    const nBot = new THREE.Mesh(neonStripH, frameGlowCyan); nBot.position.set(0, -WIN_H / 2, 0.05);
-    const nLeft = new THREE.Mesh(neonStripV, frameGlowPink); nLeft.position.set(-WIN_W / 2, 0, 0.05);
-    const nRight = new THREE.Mesh(neonStripV, frameGlowPink); nRight.position.set(WIN_W / 2, 0, 0.05);
-    frameGroup.add(nTop, nBot, nLeft, nRight);
-
-    // MONDE 3D INTÉRIEUR DU PORTAIL (Situé DERRIÈRE votre vrai mur : Z de 0 à -22 mètres !)
-    const portalWorldGroup = new THREE.Group();
-    portalRoot.add(portalWorldGroup);
-
-    // Texture étoilée & nébuleuse pour les parois profondes du portail
-    function createNebulaCanvasTexture(themeIdx) {
+    function createVividGalaxyTex() {
       const c = document.createElement('canvas');
       c.width = 1024; c.height = 1024;
       const ctx = c.getContext('2d');
-      const grad = ctx.createRadialGradient(512, 512, 50, 512, 512, 700);
-      if (themeIdx === 0) {
-        grad.addColorStop(0, '#0f172a');
-        grad.addColorStop(0.5, '#090d24');
-        grad.addColorStop(1, '#02040a');
-      } else {
-        grad.addColorStop(0, '#2e1065');
-        grad.addColorStop(0.5, '#0f172a');
-        grad.addColorStop(1, '#040711');
-      }
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 1024, 1024);
-
-      // Étoiles & grilles de perspective
-      for (let i = 0; i < 450; i++) {
-        ctx.fillStyle = i % 5 === 0 ? '#38bdf8' : (i % 7 === 0 ? '#f472b6' : '#ffffff');
-        const r = Math.random() * 2.2;
+      const g = ctx.createRadialGradient(512, 512, 40, 512, 512, 720);
+      g.addColorStop(0, '#3a0ca3');
+      g.addColorStop(0.45, '#10002b');
+      g.addColorStop(1, '#03040c');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, 1024, 1024);
+      const starColors = ['#00f7ff', '#ff007f', '#00ff88', '#ffbe0b', '#ffffff'];
+      for (let i = 0; i < 600; i++) {
+        ctx.fillStyle = starColors[i % starColors.length];
         ctx.beginPath();
-        ctx.arc(Math.random() * 1024, Math.random() * 1024, r, 0, Math.PI * 2);
+        ctx.arc(Math.random() * 1024, Math.random() * 1024, Math.random() * 2.4, 0, Math.PI * 2);
         ctx.fill();
       }
-      const tex = new THREE.CanvasTexture(c);
-      tex.encoding = THREE.sRGBEncoding;
-      return tex;
+      return new THREE.CanvasTexture(c);
     }
 
-    const portalRoomMat = new THREE.MeshBasicMaterial({
-      map: createNebulaCanvasTexture(0),
-      side: THREE.BackSide
+    const skyBox = new THREE.Mesh(
+      new THREE.BoxGeometry(DEPTH_W - 0.1, DEPTH_H - 0.1, DEPTH_D),
+      new THREE.MeshBasicMaterial({ map: createVividGalaxyTex(), side: THREE.BackSide })
+    );
+    skyBox.position.set(0, 0, -DEPTH_D / 2 - 0.02);
+    skyBox.renderOrder = 2;
+    deepWorld.add(skyBox);
+
+    // Anneaux Néon Vivid en profondeur derrière le mur
+    const deepRings = [];
+    const vividRingColors = [0x00f7ff, 0xff007f, 0x00ff88, 0xffbe0b, 0x9d4edd];
+    for (let i = 1; i <= 8; i++) {
+      const rMesh = new THREE.Mesh(
+        new THREE.TorusGeometry(1.1 + i * 0.25, 0.03, 16, 48),
+        new THREE.MeshBasicMaterial({ color: vividRingColors[i % vividRingColors.length] })
+      );
+      rMesh.position.set(0, 0, -i * 2.6);
+      rMesh.renderOrder = 2;
+      deepWorld.add(rMesh);
+      deepRings.push(rMesh);
+    }
+
+    // Planète Cyber-Saturne Géante en arrière-plan
+    const bgPlanetGroup = new THREE.Group();
+    bgPlanetGroup.position.set(0.8, 0.5, -13.5);
+    deepWorld.add(bgPlanetGroup);
+    const bgPlanet = new THREE.Mesh(
+      new THREE.SphereGeometry(1.8, 40, 40),
+      new THREE.MeshStandardMaterial({ color: 0xff007f, emissive: 0x7209b7, emissiveIntensity: 0.5, roughness: 0.3 })
+    );
+    bgPlanet.renderOrder = 2;
+    const bgRing = new THREE.Mesh(
+      new THREE.RingGeometry(2.3, 3.8, 64),
+      new THREE.MeshBasicMaterial({ color: 0x00f7ff, side: THREE.DoubleSide, transparent: true, opacity: 0.85 })
+    );
+    bgRing.rotation.x = 1.1; bgRing.renderOrder = 2;
+    bgPlanetGroup.add(bgPlanet, bgRing);
+
+    // =========================================================================
+    // 5. CORPS COMPLET 3D DU JOUEUR (FULL-BODY IK AVATAR : TÊTE, TORSE, BRAS, MAINS, JAMBES & PIEDS !)
+    //    Marche quand vous bougez, plie les genoux, frappe avec les mains et les pieds !
+    // =========================================================================
+    const playerBodyGroup = new THREE.Group();
+    playerBodyGroup.name = 'FullBodyAvatarIK';
+    scene.add(playerBodyGroup);
+
+    const suitArmorMat = new THREE.MeshStandardMaterial({
+      color: 0x111827, roughness: 0.2, metalness: 0.9, emissive: 0x00f7ff, emissiveIntensity: 0.15
     });
-    const portalInteriorBox = new THREE.Mesh(
-      new THREE.BoxGeometry(TUNNEL_W - 0.05, TUNNEL_H - 0.05, TUNNEL_D),
-      portalRoomMat
-    );
-    portalInteriorBox.position.set(0, 0, -TUNNEL_D / 2 - 0.02);
-    portalInteriorBox.renderOrder = 2;
-    portalWorldGroup.add(portalInteriorBox);
+    const suitJointMat = new THREE.MeshBasicMaterial({ color: 0x00f7ff });
+    const suitCoreMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
+    const bootNeonMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a, roughness: 0.2, metalness: 0.85, emissive: 0x00ff88, emissiveIntensity: 0.45
+    });
 
-    // Arches architecturales lumineuses successives à l'intérieur de la fenêtre (effet de profondeur 3D saisissant !)
-    const portalArches = [];
-    for (let i = 1; i <= 7; i++) {
-      const archZ = -i * 2.4;
-      const scale = 1.0 + i * 0.22;
-      const archRing = new THREE.Mesh(
-        new THREE.BoxGeometry(WIN_W * scale, WIN_H * scale, 0.06),
-        new THREE.MeshBasicMaterial({
-          color: i % 2 === 0 ? 0x00f2fe : 0xa855f7,
-          wireframe: true
-        })
-      );
-      archRing.position.set(0, 0, archZ);
-      archRing.renderOrder = 2;
-      portalWorldGroup.add(archRing);
-      portalArches.push(archRing);
+    // Torse & Cœur Énergétique (sous votre tête, visible quand vous baissez les yeux !)
+    const torsoGroup = new THREE.Group();
+    playerBodyGroup.add(torsoGroup);
+
+    const chestArmor = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.42, 0.18), suitArmorMat);
+    const chestCore = new THREE.Mesh(new THREE.OctahedronGeometry(0.06, 1), suitCoreMat);
+    chestCore.position.set(0, 0.06, -0.10);
+    const beltMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.15, 0.06, 20), suitJointMat);
+    beltMesh.position.set(0, -0.23, 0);
+    torsoGroup.add(chestArmor, chestCore, beltMesh);
+
+    // Création des 2 Jambes articulées (Cuisse + Genou + Tibia + Botte Cybernétique)
+    const legs = [];
+    for (let side = -1; side <= 1; side += 2) {
+      const legRoot = new THREE.Group();
+      const thigh = new THREE.Mesh(new THREE.CylinderGeometry(0.062, 0.052, 0.38, 16), suitArmorMat);
+      const knee = new THREE.Mesh(new THREE.SphereGeometry(0.058, 16, 16), suitJointMat);
+      const shin = new THREE.Mesh(new THREE.CylinderGeometry(0.050, 0.042, 0.38, 16), suitArmorMat);
+      const footBoot = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.07, 0.24), bootNeonMat);
+
+      legRoot.add(thigh, knee, shin, footBoot);
+      playerBodyGroup.add(legRoot);
+
+      legs.push({
+        side,
+        thigh, knee, shin, footBoot,
+        footWorldPos: new THREE.Vector3(side * 0.14, 0.04, 0),
+        prevFootWorldPos: new THREE.Vector3(side * 0.14, 0.04, 0),
+        footVel: new THREE.Vector3()
+      });
     }
 
-    // Planète Géante Saturne + Anneaux + Station Spatiale flottant à 9 mètres derrière votre vrai mur !
-    const saturnPortalGroup = new THREE.Group();
-    saturnPortalGroup.position.set(0.4, 0.25, -8.5);
-    portalWorldGroup.add(saturnPortalGroup);
-
-    const saturnPlanet = new THREE.Mesh(
-      new THREE.SphereGeometry(1.45, 48, 48),
-      new THREE.MeshStandardMaterial({
-        color: 0xf59e0b, roughness: 0.45, metalness: 0.15, emissive: 0x451a03, emissiveIntensity: 0.35
-      })
-    );
-    saturnPlanet.renderOrder = 2;
-    saturnPortalGroup.add(saturnPlanet);
-
-    const saturnRing = new THREE.Mesh(
-      new THREE.RingGeometry(1.85, 3.1, 64),
-      new THREE.MeshStandardMaterial({
-        color: 0x38bdf8, side: THREE.DoubleSide, transparent: true, opacity: 0.78, roughness: 0.3, emissive: 0x0284c7, emissiveIntensity: 0.4
-      })
-    );
-    saturnRing.rotation.x = Math.PI * 0.38;
-    saturnRing.rotation.y = 0.25;
-    saturnRing.renderOrder = 2;
-    saturnPortalGroup.add(saturnRing);
-
-    // Station Spatiale / Cristal Géant rotatif à 4.2 mètres derrière le mur (facile à viser en lançant une balle !)
-    const portalCoreTarget = new THREE.Mesh(
-      new THREE.OctahedronGeometry(0.55, 1),
-      new THREE.MeshStandardMaterial({
-        color: 0x00f2fe, emissive: 0x0284c7, emissiveIntensity: 0.65, roughness: 0.1, metalness: 0.9, wireframe: false
-      })
-    );
-    portalCoreTarget.position.set(-0.35, -0.1, -4.2);
-    portalCoreTarget.renderOrder = 2;
-    portalWorldGroup.add(portalCoreTarget);
-
-    // Astéroïdes flottants derrière votre mur
-    const portalAsteroids = [];
-    for (let i = 0; i < 18; i++) {
-      const ast = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(0.12 + Math.random() * 0.22, 0),
-        new THREE.MeshStandardMaterial({
-          color: i % 2 === 0 ? 0x94a3b8 : 0x38bdf8,
-          roughness: 0.35, metalness: 0.75
-        })
-      );
-      const angle = (i / 18) * Math.PI * 2;
-      const rad = 1.2 + Math.random() * 1.8;
-      ast.position.set(Math.cos(angle) * rad, Math.sin(angle) * (rad * 0.7), -2.5 - Math.random() * 11);
-      ast.renderOrder = 2;
-      portalWorldGroup.add(ast);
-      portalAsteroids.push({ mesh: ast, angle, rad, speed: 0.25 + Math.random() * 0.4 });
+    // Création des 2 Bras IK (Épaule -> Coude -> Poignet)
+    const armsIK = [];
+    for (let i = 0; i < 2; i++) {
+      const upperArm = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.036, 1.0, 12), suitArmorMat);
+      const elbowSphere = new THREE.Mesh(new THREE.SphereGeometry(0.044, 14, 14), suitJointMat);
+      const forearm = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.030, 1.0, 12), suitArmorMat);
+      playerBodyGroup.add(upperArm, elbowSphere, forearm);
+      armsIK.push({ upperArm, elbowSphere, forearm });
     }
 
-    function CyclePortalDimension() {
-      state.portalTheme = (state.portalTheme + 1) % 2;
-      portalRoomMat.map = createNebulaCanvasTexture(state.portalTheme);
-      portalRoomMat.needsUpdate = true;
-      saturnPlanet.material.color.setHex(state.portalTheme === 0 ? 0xf59e0b : 0xec4899);
-      saturnRing.material.color.setHex(state.portalTheme === 0 ? 0x38bdf8 : 0x10b981);
-      document.getElementById('stat-portal').textContent =
-        state.portalTheme === 0 ? 'Saturne & Station Sci-Fi' : 'Nébuleuse Cyber-Synthwave';
-      playSynthSFX('portal');
-    }
+    let walkPhase = 0;
+    const lastHeadPos = new THREE.Vector3(0, 1.6, 1.4);
 
-    // =========================================================================
-    // 4. MOTEUR PHYSIQUE 3D INTERACTIF (GRAB, THROW, BOUNCE, PYRAMID & BASKET)
-    // =========================================================================
-    const physicsGroup = new THREE.Group();
-    physicsGroup.name = 'PhysicsPlayground';
-    scene.add(physicsGroup);
+    function updateFullBodyAvatarIK(dt, timeSec) {
+      const xrCam = renderer.xr.isPresenting ? renderer.xr.getCamera(camera) : camera;
+      const headPos = new THREE.Vector3();
+      const headQuat = new THREE.Quaternion();
+      xrCam.matrixWorld.decompose(headPos, headQuat, new THREE.Vector3());
 
-    const physBodies = []; // { mesh, vel: Vector3, angVel: Vector3, radius, mass, grabbedBy: -1, isPlanet: false }
+      // Direction horizontale du corps basée sur le regard
+      const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(headQuat);
+      forward.y = 0;
+      if (forward.lengthSq() < 0.001) forward.set(0, 0, -1);
+      forward.normalize();
+      const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0, 1, 0)).normalize();
+      const bodyYaw = Math.atan2(-forward.x, -forward.z);
 
-    // Panier de Basket Holographique Néon sur le côté droit pour tester vos lancers !
-    const hoopGroup = new THREE.Group();
-    hoopGroup.position.set(1.25, 1.55, -1.45);
-    hoopGroup.rotation.y = -0.45;
-    physicsGroup.add(hoopGroup);
+      // Vitesse horizontale de marche du joueur dans sa vraie pièce
+      const moveDelta = new THREE.Vector3(headPos.x - lastHeadPos.x, 0, headPos.z - lastHeadPos.z);
+      const walkSpeed = Math.min(3.5, moveDelta.length() / Math.max(0.001, dt));
+      lastHeadPos.copy(headPos);
 
-    const hoopBackboard = new THREE.Mesh(
-      new THREE.BoxGeometry(0.75, 0.52, 0.025),
-      new THREE.MeshPhysicalMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.45, roughness: 0.1 })
-    );
-    hoopBackboard.position.set(0, 0.18, -0.18);
-    hoopGroup.add(hoopBackboard);
+      if (walkSpeed > 0.06) {
+        walkPhase += dt * (4.5 + walkSpeed * 4.2);
+      } else {
+        // Légère respiration / retour au repos
+        walkPhase += dt * 1.2;
+      }
 
-    const hoopRim = new THREE.Mesh(
-      new THREE.TorusGeometry(0.21, 0.016, 16, 36),
-      new THREE.MeshBasicMaterial({ color: 0xf97316 })
-    );
-    hoopRim.rotation.x = Math.PI / 2;
-    hoopGroup.add(hoopRim);
+      // Positionner le Torse sous la tête (légèrement en arrière pour ne pas gêner la vue tout en étant visible quand on regarde en bas !)
+      const neckPos = headPos.clone().addScaledVector(forward, -0.09);
+      neckPos.y = headPos.y - 0.36;
+      torsoGroup.position.copy(neckPos);
+      torsoGroup.rotation.set(0, bodyYaw, 0);
+      chestCore.rotation.z += dt * 2.5;
 
-    // Table / Piédestal holographique devant vous (à Y = 0.74m, hauteur d'un vrai bureau)
-    const pedestalMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(1.10, 0.03, 0.55),
-      new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.3, metalness: 0.8, transparent: true, opacity: 0.65 })
-    );
-    pedestalMesh.position.set(0, 0.74, -0.82);
-    pedestalMesh.receiveShadow = true;
-    physicsGroup.add(pedestalMesh);
+      const hipCenter = neckPos.clone();
+      hipCenter.y = Math.max(0.42, neckPos.y - 0.24);
 
-    const pedestalBorder = new THREE.LineSegments(
-      new THREE.EdgesGeometry(new THREE.BoxGeometry(1.10, 0.03, 0.55)),
-      new THREE.LineBasicMaterial({ color: 0x00f2fe })
-    );
-    pedestalBorder.position.copy(pedestalMesh.position);
-    physicsGroup.add(pedestalBorder);
+      // Animation procédurale des 2 Jambes & Pieds (marche réelle + flexion des genoux si accroupi !)
+      const strideAmp = walkSpeed > 0.06 ? Math.min(0.28, walkSpeed * 0.16) : 0.02;
+      const liftAmp   = walkSpeed > 0.06 ? Math.min(0.14, walkSpeed * 0.08) : 0.0;
 
-    function createPhysicsObject(type, pos, colorHex, radius = 0.065) {
-      let geom;
-      if (type === 'sphere') geom = new THREE.SphereGeometry(radius, 32, 32);
-      else if (type === 'box') geom = new THREE.BoxGeometry(radius * 1.65, radius * 1.65, radius * 1.65);
-      else if (type === 'crystal') geom = new THREE.OctahedronGeometry(radius * 1.15, 0);
-      else geom = new THREE.CylinderGeometry(radius * 0.85, radius * 0.85, radius * 2.1, 24);
+      legs.forEach((leg, idx) => {
+        const phase = walkPhase + (idx === 0 ? 0 : Math.PI);
+        const hipPos = hipCenter.clone().addScaledVector(right, leg.side * 0.13);
 
-      const mat = new THREE.MeshPhysicalMaterial({
-        color: colorHex,
-        roughness: 0.18,
-        metalness: type === 'crystal' ? 0.1 : 0.45,
-        clearcoat: 0.8,
-        emissive: colorHex,
-        emissiveIntensity: 0.18
+        const stepForward = Math.sin(phase) * strideAmp;
+        const stepLift = Math.max(0, Math.cos(phase)) * liftAmp;
+
+        const footTarget = new THREE.Vector3(
+          hipPos.x,
+          ROOM_BOUNDS.floorY + 0.035 + stepLift,
+          hipPos.z
+        ).addScaledVector(forward, stepForward + 0.04);
+
+        // Calcul de la vélocité du pied (pour pouvoir shooter dans les balles au sol avec vos pieds !)
+        leg.footVel.subVectors(footTarget, leg.prevFootWorldPos).divideScalar(Math.max(0.005, dt));
+        leg.prevFootWorldPos.copy(footTarget);
+        leg.footWorldPos.copy(footTarget);
+
+        // Position du genou (plié vers l'avant quand on s'accroupit ou quand on marche)
+        const legLen = hipPos.distanceTo(footTarget);
+        const crouchBend = Math.max(0.04, Math.min(0.26, (0.82 - legLen) * 0.65));
+        const kneePos = hipPos.clone().lerp(footTarget, 0.5).addScaledVector(forward, 0.08 + crouchBend);
+
+        // Placer Cuisse, Genou, Tibia et Botte
+        leg.knee.position.copy(kneePos);
+
+        leg.thigh.position.copy(hipPos).lerp(kneePos, 0.5);
+        leg.thigh.scale.set(1, hipPos.distanceTo(kneePos) / 0.38, 1);
+        leg.thigh.quaternion.setFromUnitVectors(
+          new THREE.Vector3(0, 1, 0),
+          kneePos.clone().sub(hipPos).normalize()
+        );
+
+        leg.shin.position.copy(kneePos).lerp(footTarget, 0.5);
+        leg.shin.scale.set(1, kneePos.distanceTo(footTarget) / 0.38, 1);
+        leg.shin.quaternion.setFromUnitVectors(
+          new THREE.Vector3(0, 1, 0),
+          footTarget.clone().sub(kneePos).normalize()
+        );
+
+        leg.footBoot.position.copy(footTarget).addScaledVector(forward, 0.05);
+        leg.footBoot.rotation.set(0, bodyYaw, 0);
       });
 
-      const mesh = new THREE.Mesh(geom, mat);
+      // Cinématique Inverse (IK) des 2 Bras reliant vos Épaules à vos Mains / Manettes !
+      for (let i = 0; i < 2; i++) {
+        const sideSign = i === 0 ? -1 : 1;
+        const shoulderPos = neckPos.clone()
+          .addScaledVector(right, sideSign * 0.19)
+          .add(new THREE.Vector3(0, 0.14, 0));
+
+        let handPos;
+        if (renderer.xr.isPresenting && xrHandsData[i]) {
+          handPos = new THREE.Vector3().setFromMatrixPosition(xrHandsData[i].ctrl.matrixWorld);
+        } else {
+          // En mode aperçu PC, mains animées devant le joueur
+          handPos = neckPos.clone()
+            .addScaledVector(forward, 0.38)
+            .addScaledVector(right, sideSign * 0.24)
+            .add(new THREE.Vector3(0, 0.05 + Math.sin(timeSec * 2 + i) * 0.03, 0));
+        }
+
+        const elbowPos = shoulderPos.clone().lerp(handPos, 0.48)
+          .addScaledVector(right, sideSign * 0.09)
+          .add(new THREE.Vector3(0, -0.10, 0));
+
+        const arm = armsIK[i];
+        arm.elbowSphere.position.copy(elbowPos);
+
+        const uVec = elbowPos.clone().sub(shoulderPos);
+        arm.upperArm.position.copy(shoulderPos).lerp(elbowPos, 0.5);
+        arm.upperArm.scale.set(1, Math.max(0.05, uVec.length()), 1);
+        arm.upperArm.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), uVec.normalize());
+
+        const fVec = handPos.clone().sub(elbowPos);
+        arm.forearm.position.copy(elbowPos).lerp(handPos, 0.5);
+        arm.forearm.scale.set(1, Math.max(0.05, fVec.length()), 1);
+        arm.forearm.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), fVec.normalize());
+      }
+    }
+
+    // =========================================================================
+    // 6. MAINS ARTICULÉES, SABRES NÉON VIVID & CANONS PLASMA (QUEST 3)
+    // =========================================================================
+    const xrHandsData = [];
+    const raycaster = new THREE.Raycaster();
+    const tempRot = new THREE.Matrix4();
+    let weaponMode = 'both'; // 'both', 'saber', 'blaster'
+
+    for (let i = 0; i < 2; i++) {
+      const ctrl = renderer.xr.getController(i);
+      const colHex = i === 0 ? 0x00f7ff : 0xff007f;
+
+      // Gantelet Cybernétique sur chaque main
+      const gauntlet = new THREE.Mesh(
+        new THREE.BoxGeometry(0.075, 0.055, 0.14),
+        new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.2, emissive: colHex, emissiveIntensity: 0.5 })
+      );
+      ctrl.add(gauntlet);
+
+      // Lame de Sabre Laser Néon Vivid (deployable sur chaque main !)
+      const saberBlade = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.012, 0.016, 0.78, 16),
+        new THREE.MeshBasicMaterial({ color: colHex })
+      );
+      saberBlade.rotation.x = -Math.PI / 2;
+      saberBlade.position.set(0, 0, -0.44);
+      ctrl.add(saberBlade);
+
+      // Rayon de visée laser
+      const lineGeom = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(0, 0, -3.0)
+      ]);
+      const aimLaser = new THREE.Line(lineGeom, new THREE.LineBasicMaterial({ color: colHex }));
+      ctrl.add(aimLaser);
+
+      const hData = {
+        ctrl,
+        index: i,
+        colorHex: colHex,
+        saberBlade,
+        grabbedObj: null,
+        grabDist: 0.24,
+        history: [],
+        vel: new THREE.Vector3(),
+        worldPos: new THREE.Vector3(),
+        bladeTipWorld: new THREE.Vector3()
+      };
+
+      ctrl.addEventListener('selectstart', () => onHandTriggerDown(hData));
+      ctrl.addEventListener('selectend', () => onHandTriggerUp(hData));
+      ctrl.addEventListener('squeezestart', () => {
+        if (!tryGrabNearestBall(hData)) calibrateRoomToUser();
+      });
+      ctrl.addEventListener('squeezeend', () => onHandTriggerUp(hData));
+
+      scene.add(ctrl);
+      xrHandsData.push(hData);
+    }
+
+    function cycleWeaponMode() {
+      if (weaponMode === 'both') weaponMode = 'blaster';
+      else if (weaponMode === 'blaster') weaponMode = 'saber';
+      else weaponMode = 'both';
+
+      const showSaber = (weaponMode === 'both' || weaponMode === 'saber');
+      xrHandsData.forEach(h => { h.saberBlade.visible = showSaber; });
+
+      const labels = {
+        both: '⚔️ Arme : Canons Plasma + Sabres Néon',
+        blaster: '🔫 Arme : Canons Plasma + Télékinésie',
+        saber: '🗡️ Arme : Doubles Sabres Néon Vivid'
+      };
+      document.getElementById('btn-weapons').textContent = labels[weaponMode];
+      playSFX('saber');
+    }
+
+    // =========================================================================
+    // 7. SYSTÈME DE JEU COMPLET À 4 NIVEAUX + BOSS TITAN + BANNIÈRE 3D HOLOGRAPHIQUE
+    // =========================================================================
+    const game = {
+      level: 1,
+      score: 0,
+      levelScore: 0,
+      levelTargetScore: 500,
+      playerHP: 100,
+      zeroGravity: false,
+      bossHP: 1000,
+      bossMaxHP: 1000
+    };
+
+    // Écran Holographique 3D flottant dans la pièce (affiche le Niveau, Score, Santé + Boutons tactiles 3D !)
+    const stageBannerCanvas = document.createElement('canvas');
+    stageBannerCanvas.width = 1024;
+    stageBannerCanvas.height = 512;
+    const sbCtx = stageBannerCanvas.getContext('2d');
+    const sbTex = new THREE.CanvasTexture(stageBannerCanvas);
+    sbTex.encoding = THREE.sRGBEncoding;
+
+    const holoHUDGroup = new THREE.Group();
+    holoHUDGroup.position.set(-0.88, 1.38, -0.95);
+    holoHUDGroup.rotation.y = 0.50;
+    scene.add(holoHUDGroup);
+
+    const holoHUDMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.76, 0.38),
+      new THREE.MeshBasicMaterial({ map: sbTex, transparent: true, side: THREE.DoubleSide })
+    );
+    holoHUDGroup.add(holoHUDMesh);
+
+    const hud3DButtons = [
+      { id: 'lvl1', label: '🥇 LEVEL 1', x: 30,  y: 300, w: 225, h: 85, col: '#00b4d8' },
+      { id: 'lvl2', label: '🥈 LEVEL 2', x: 275, y: 300, w: 225, h: 85, col: '#7209b7' },
+      { id: 'lvl3', label: '🥉 LEVEL 3', x: 520, y: 300, w: 225, h: 85, col: '#f72585' },
+      { id: 'lvl4', label: '👑 BOSS L4', x: 765, y: 300, w: 229, h: 85, col: '#ffbe0b' },
+      { id: 'calib', label: '📍 CALIBRER MURS & BUREAU ICI', x: 30, y: 405, w: 470, h: 80, col: '#00ff88' },
+      { id: 'weap',  label: '⚔️ CHANGER ARME / SABRE',       x: 520, y: 405, w: 474, h: 80, col: '#9d4edd' }
+    ];
+    let hovered3DBtn = null;
+
+    function render3DHoloHUD(uv = null, announcement = null) {
+      const ctx = sbCtx;
+      ctx.clearRect(0, 0, 1024, 512);
+
+      ctx.fillStyle = 'rgba(6, 9, 25, 0.92)';
+      ctx.strokeStyle = '#00f7ff';
+      ctx.lineWidth = 6;
+      ctx.fillRect(6, 6, 1012, 500);
+      ctx.strokeRect(6, 6, 1012, 500);
+
+      // Titre du Niveau
+      ctx.fillStyle = '#180c38';
+      ctx.fillRect(14, 14, 996, 86);
+      ctx.fillStyle = '#ffbe0b';
+      ctx.font = 'bold 32px Segoe UI, sans-serif';
+      const lvlNames = {
+        1: '🥇 LEVEL 1 : BRÈCHE CRISTALLINE (MURS & BUREAU 3D)',
+        2: '🥈 LEVEL 2 : ASSAUT DES SENTINELLES VIVID',
+        3: '🥉 LEVEL 3 : TEMPÊTE ZÉRO-GRAVITÉ & SABRES NÉON',
+        4: '👑 LEVEL 4 (BOSS FINAL) : LE TITAN DIMENSIONNEL'
+      };
+      ctx.fillText(lvlNames[game.level] || 'CYBER-BREACH MR', 30, 56);
+
+      ctx.fillStyle = '#00ff88';
+      ctx.font = 'bold 22px Consolas, monospace';
+      ctx.fillText(`SCORE: ${game.score} PTS   |   BOUCLIER: ${game.playerHP}%   |   CORPS IK + PIEDS: ACTIF`, 30, 90);
+
+      // Barre de progression du Niveau (ou Vie du Boss au Level 4)
+      ctx.fillStyle = '#090d1e';
+      ctx.fillRect(30, 120, 964, 42);
+      const ratio = game.level === 4
+        ? Math.max(0, game.bossHP / game.bossMaxHP)
+        : Math.min(1, game.levelScore / game.levelTargetScore);
+      const grad = ctx.createLinearGradient(30, 0, 994, 0);
+      grad.addColorStop(0, '#00f7ff');
+      grad.addColorStop(0.5, '#ff007f');
+      grad.addColorStop(1, '#ffbe0b');
+      ctx.fillStyle = grad;
+      ctx.fillRect(30, 120, 964 * ratio, 42);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(30, 120, 964, 42);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px Segoe UI, sans-serif';
+      const barTxt = game.level === 4
+        ? `VIE DU BOSS TITAN : ${Math.ceil(game.bossHP)} / ${game.bossMaxHP} HP`
+        : `PROGRESSION NIVEAU ${game.level} : ${game.levelScore} / ${game.levelTargetScore} PTS`;
+      ctx.fillText(barTxt, 320, 149);
+
+      if (announcement) {
+        ctx.fillStyle = '#ff007f';
+        ctx.font = 'bold 34px Segoe UI, sans-serif';
+        ctx.fillText(announcement, 30, 240);
+      } else {
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = '22px Segoe UI, sans-serif';
+        ctx.fillText('💡 Frappez avec vos Mains, vos Pieds, vos Sabres Néon ou lancez les Sphères Vivid !', 30, 215);
+        ctx.fillStyle = '#00f7ff';
+        ctx.fillText('👉 Appuyez sur Grip (Squeeze) pour calibrer votre vrai bureau et vos vrais murs !', 30, 255);
+      }
+
+      const cx = uv ? uv.x * 1024 : -1;
+      const cy = uv ? (1 - uv.y) * 512 : -1;
+      hovered3DBtn = null;
+
+      hud3DButtons.forEach(b => {
+        const hover = (cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h);
+        if (hover) hovered3DBtn = b.id;
+        ctx.fillStyle = hover ? '#ffffff' : b.col;
+        ctx.fillRect(b.x, b.y, b.w, b.h);
+        ctx.fillStyle = hover ? '#040611' : '#ffffff';
+        ctx.font = 'bold 22px Segoe UI, sans-serif';
+        ctx.fillText(b.label, b.x + 16, b.y + 50);
+      });
+
+      sbTex.needsUpdate = true;
+    }
+
+    // Objets Physiques Vivid (Sphères, Cubes, Cristaux) + Ennemis + Boss Titan
+    const physObjects = [];
+    const enemies = [];
+    const particles = [];
+
+    // Boss Titan Dimensionnel (Level 4)
+    const bossGroup = new THREE.Group();
+    bossGroup.position.set(0, 1.45, ROOM_BOUNDS.minZ - 1.1);
+    bossGroup.visible = false;
+    scene.add(bossGroup);
+
+    const bossBody = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(0.52, 1),
+      new THREE.MeshStandardMaterial({ color: 0x240046, emissive: 0xff007f, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.15, wireframe: false })
+    );
+    const bossShieldRing1 = new THREE.Mesh(
+      new THREE.TorusGeometry(0.78, 0.035, 16, 48),
+      new THREE.MeshBasicMaterial({ color: 0x00f7ff })
+    );
+    const bossShieldRing2 = new THREE.Mesh(
+      new THREE.TorusGeometry(0.95, 0.03, 16, 48),
+      new THREE.MeshBasicMaterial({ color: 0xffbe0b })
+    );
+    bossShieldRing2.rotation.x = Math.PI / 2;
+    bossGroup.add(bossBody, bossShieldRing1, bossShieldRing2);
+
+    function spawnVividPhysObject(kind, pos, colorHex, radius = 0.068) {
+      let geom;
+      if (kind === 'sphere') geom = new THREE.SphereGeometry(radius, 28, 28);
+      else if (kind === 'crystal') geom = new THREE.OctahedronGeometry(radius * 1.25, 0);
+      else geom = new THREE.BoxGeometry(radius * 1.6, radius * 1.6, radius * 1.6);
+
+      const mesh = new THREE.Mesh(
+        geom,
+        new THREE.MeshPhysicalMaterial({
+          color: colorHex, emissive: colorHex, emissiveIntensity: 0.38,
+          roughness: 0.12, metalness: 0.35, clearcoat: 1.0
+        })
+      );
       mesh.position.copy(pos);
       mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      physicsGroup.add(mesh);
+      scene.add(mesh);
 
-      const body = {
-        mesh,
-        type,
-        radius,
-        vel: new THREE.Vector3(0, 0, 0),
-        angVel: new THREE.Vector3(
-          (Math.random() - 0.5) * 0.5,
-          (Math.random() - 0.5) * 0.5,
-          (Math.random() - 0.5) * 0.5
-        ),
-        grabbedBy: -1,
-        enteredPortal: false
+      const obj = {
+        mesh, kind, radius, colorHex,
+        vel: new THREE.Vector3(),
+        angVel: new THREE.Vector3(Math.random() * 2, Math.random() * 2, Math.random() * 2),
+        grabbedBy: -1
       };
-      physBodies.push(body);
-      return body;
+      physObjects.push(obj);
+      return obj;
     }
 
-    function respawnPhysicsPlayground() {
-      while (physBodies.length > 0) {
-        const b = physBodies.pop();
-        physicsGroup.remove(b.mesh);
-      }
-
-      // 1. Sphères d'énergie & Ballons de Basket Néon posés sur votre bureau devant vous (prêts à saisir à la main !)
-      const palette = [0x00f2fe, 0xec4899, 0x10b981, 0xf59e0b, 0xa855f7, 0x3b82f6];
-      for (let i = 0; i < 6; i++) {
-        const x = -0.42 + i * 0.168;
-        const t = i % 2 === 0 ? 'sphere' : 'crystal';
-        createPhysicsObject(t, new THREE.Vector3(x, 0.83, -0.72), palette[i], 0.058);
-      }
-
-      // 2. Pyramide de Chamboule-Tout (10 cylindres/blocs métalliques à renverser en lançant une balle !)
-      const pyrBaseZ = -0.96;
-      const pyrColors = [0xef4444, 0xf97316, 0xeab308, 0x22c55e];
-      for (let row = 0; row < 4; row++) {
-        const count = 4 - row;
-        for (let c = 0; c < count; c++) {
-          const px = (c - (count - 1) / 2) * 0.095;
-          const py = 0.81 + row * 0.095;
-          createPhysicsObject('box', new THREE.Vector3(px, py, pyrBaseZ), pyrColors[row], 0.044);
-        }
-      }
-
-      document.getElementById('stat-objs').textContent = `${physBodies.length} actifs`;
-      playSynthSFX('grab');
-    }
-
-    respawnPhysicsPlayground();
-
-    function toggleGravityMode() {
-      state.zeroGravity = !state.zeroGravity;
-      const btn = document.getElementById('btn-gravity');
-      if (state.zeroGravity) {
-        btn.textContent = '🪶 Gravité : ZÉRO-G (Apesanteur Spatiale)';
-        btn.classList.add('active');
-        // Donner une légère impulsion flottante à tous les objets !
-        physBodies.forEach(b => {
-          b.vel.y += 0.35 + Math.random() * 0.45;
-          b.vel.x += (Math.random() - 0.5) * 0.3;
-          b.vel.z += (Math.random() - 0.5) * 0.3;
-        });
-      } else {
-        btn.textContent = '🌍 Gravité : Terrestre (9.81 m/s²)';
-        btn.classList.remove('active');
-      }
-      playSynthSFX('portal');
-      drawHolographicWristPanel();
-    }
-
-    // =========================================================================
-    // 5. INVASION DE DRONES HOLOGRAPHIQUES & EXPLOSIONS DE PARTICULES 3D
-    // =========================================================================
-    const dronesGroup = new THREE.Group();
-    scene.add(dronesGroup);
-    const activeDrones = [];
-    const explosionParticles = [];
-
-    function spawnHolographicDrone(index) {
-      const dGroup = new THREE.Group();
+    function spawnEnemyTarget(type, pos, colorHex) {
+      const g = new THREE.Group();
       const core = new THREE.Mesh(
-        new THREE.SphereGeometry(0.11, 24, 24),
-        new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.2, metalness: 0.9 })
+        type === 'crystal'
+          ? new THREE.OctahedronGeometry(0.14, 0)
+          : new THREE.SphereGeometry(0.13, 24, 24),
+        new THREE.MeshStandardMaterial({
+          color: colorHex, emissive: colorHex, emissiveIntensity: 0.65, roughness: 0.15, metalness: 0.8
+        })
       );
-      const eye = new THREE.Mesh(
-        new THREE.SphereGeometry(0.055, 16, 16),
-        new THREE.MeshBasicMaterial({ color: 0xff2a55 })
+      const halo = new THREE.Mesh(
+        new THREE.TorusGeometry(0.19, 0.015, 12, 32),
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
       );
-      eye.position.z = 0.08;
-      const ring = new THREE.Mesh(
-        new THREE.TorusGeometry(0.15, 0.012, 12, 32),
-        new THREE.MeshBasicMaterial({ color: 0x00f2fe })
-      );
-      ring.rotation.x = Math.PI / 2;
-      dGroup.add(core, eye, ring);
+      g.add(core, halo);
+      g.position.copy(pos);
+      scene.add(g);
 
-      const angle = (index / 4) * Math.PI * 2;
-      dGroup.position.set(Math.sin(angle) * 1.1, 1.35 + (index % 2) * 0.35, -1.25 - Math.cos(angle) * 0.4);
-      dronesGroup.add(dGroup);
-
-      activeDrones.push({
-        group: dGroup,
-        ring,
-        baseAngle: angle,
-        speed: 0.7 + index * 0.18,
-        radius: 0.16
+      enemies.push({
+        group: g, core, halo, type, colorHex,
+        vel: new THREE.Vector3(
+          (Math.random() - 0.5) * (type === 'drone' ? 1.4 : 0.3),
+          (Math.random() - 0.5) * 0.4,
+          (Math.random() - 0.5) * (type === 'drone' ? 1.2 : 0.2)
+        ),
+        radius: 0.18,
+        phase: Math.random() * Math.PI * 2
       });
     }
 
-    for (let i = 0; i < 4; i++) spawnHolographicDrone(i);
-
-    function spawnExplosion3D(pos, colorHex = 0x00f2fe) {
-      playSynthSFX('explosion');
-      for (let i = 0; i < 26; i++) {
+    function spawnVividExplosion(pos, colorHex = 0x00f7ff, count = 28) {
+      playSFX('explode');
+      const vividPalette = [colorHex, 0x00f7ff, 0xff007f, 0xffbe0b, 0x00ff88];
+      for (let i = 0; i < count; i++) {
         const p = new THREE.Mesh(
-          new THREE.BoxGeometry(0.028, 0.028, 0.028),
-          new THREE.MeshBasicMaterial({ color: i % 2 === 0 ? colorHex : 0xfacc15 })
+          new THREE.OctahedronGeometry(0.026, 0),
+          new THREE.MeshBasicMaterial({ color: vividPalette[i % vividPalette.length] })
         );
         p.position.copy(pos);
         scene.add(p);
-        explosionParticles.push({
+        particles.push({
           mesh: p,
           vel: new THREE.Vector3(
-            (Math.random() - 0.5) * 3.8,
-            (Math.random() - 0.2) * 3.8,
-            (Math.random() - 0.5) * 3.8
+            (Math.random() - 0.5) * 4.5,
+            (Math.random() - 0.1) * 4.5,
+            (Math.random() - 0.5) * 4.5
           ),
           life: 1.0
         });
       }
     }
 
-    // =========================================================================
-    // 6. PLANÉTARIUM & SYSTÈME SOLAIRE TACTILE (SAISISSEZ LES PLANÈTES !)
-    // =========================================================================
-    const solarGroup = new THREE.Group();
-    solarGroup.position.set(-1.15, 1.35, -1.15);
-    scene.add(solarGroup);
+    function startLevel(lvl) {
+      game.level = lvl;
+      game.levelScore = 0;
+      game.playerHP = 100;
+      game.zeroGravity = (lvl === 3);
 
-    const solarPlanets = [];
-    const planetSpecs = [
-      { name: 'Soleil',  r: 0.13, dist: 0.0,  speed: 0.0, col: 0xfacc15, emissive: 0xf59e0b },
-      { name: 'Terre',   r: 0.055, dist: 0.32, speed: 1.1, col: 0x38bdf8, emissive: 0x0284c7 },
-      { name: 'Mars',    r: 0.045, dist: 0.48, speed: 0.8, col: 0xef4444, emissive: 0x991b1b },
-      { name: 'Saturne', r: 0.075, dist: 0.68, speed: 0.5, col: 0xf59e0b, emissive: 0xb45309, hasRing: true }
-    ];
+      document.querySelectorAll('.level-dock .btn').forEach(b => b.classList.remove('active'));
+      const btn = document.getElementById(`lvl-btn-${lvl}`);
+      if (btn) btn.classList.add('active');
 
-    planetSpecs.forEach((sp, idx) => {
-      if (sp.dist > 0) {
-        const orbitLine = new THREE.Mesh(
-          new THREE.RingGeometry(sp.dist - 0.003, sp.dist + 0.003, 64),
-          new THREE.MeshBasicMaterial({ color: 0x334155, side: THREE.DoubleSide })
+      // Nettoyer anciens objets & ennemis
+      while (physObjects.length > 0) scene.remove(physObjects.pop().mesh);
+      while (enemies.length > 0) scene.remove(enemies.pop().group);
+
+      const vividCols = [0x00f7ff, 0xff007f, 0x00ff88, 0xffbe0b, 0x9d4edd];
+
+      // Spawner des sphères d'énergie sur votre vrai bureau + au sol (pour frapper du pied !)
+      for (let i = 0; i < 6; i++) {
+        spawnVividPhysObject(
+          i % 2 === 0 ? 'sphere' : 'crystal',
+          new THREE.Vector3(-0.45 + i * 0.18, ROOM_BOUNDS.deskY + 0.09, ROOM_BOUNDS.deskZ),
+          vividCols[i % vividCols.length],
+          0.062
         );
-        orbitLine.rotation.x = Math.PI / 2;
-        solarGroup.add(orbitLine);
       }
-      const pMesh = new THREE.Mesh(
-        new THREE.SphereGeometry(sp.r, 32, 32),
-        new THREE.MeshStandardMaterial({
-          color: sp.col, emissive: sp.emissive, emissiveIntensity: sp.dist === 0 ? 0.85 : 0.25, roughness: 0.3
-        })
-      );
-      if (sp.hasRing) {
-        const rMesh = new THREE.Mesh(
-          new THREE.RingGeometry(sp.r * 1.35, sp.r * 2.1, 32),
-          new THREE.MeshBasicMaterial({ color: 0xfde047, side: THREE.DoubleSide, transparent: true, opacity: 0.75 })
+      // 3 Ballons d'énergie posés au sol devant vos pieds pour les frapper du pied (Foot Kick !)
+      for (let i = 0; i < 3; i++) {
+        spawnVividPhysObject(
+          'sphere',
+          new THREE.Vector3(-0.35 + i * 0.35, 0.11, -0.45),
+          0x00ff88,
+          0.095
         );
-        rMesh.rotation.x = Math.PI * 0.4;
-        pMesh.add(rMesh);
       }
-      solarGroup.add(pMesh);
-      solarPlanets.push({ mesh: pMesh, spec: sp, angle: idx * 1.4, grabbedBy: -1 });
-    });
 
-    // =========================================================================
-    // 7. PEINTURE LUMINEUSE NÉON 3D DANS L'AIR (3D LIGHT RIBBON BRUSH)
-    // =========================================================================
-    const paintGroup = new THREE.Group();
-    scene.add(paintGroup);
-    let paintModeEnabled = false;
-    const lastPaintPos = [null, null];
-    let paintHue = 0;
-
-    function addNeonBrushSegment(p1, p2) {
-      const dist = p1.distanceTo(p2);
-      if (dist < 0.008 || dist > 0.4) return;
-      paintHue = (paintHue + 2.5) % 360;
-      const color = new THREE.Color(`hsl(${paintHue}, 100%, 60%)`);
-      const geom = new THREE.CylinderGeometry(0.011, 0.011, dist, 10);
-      geom.rotateX(Math.PI / 2);
-      const mesh = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({ color }));
-      mesh.position.copy(p1).lerp(p2, 0.5);
-      mesh.lookAt(p2);
-      paintGroup.add(mesh);
-      if (paintGroup.children.length > 500) {
-        const old = paintGroup.children[0];
-        paintGroup.remove(old);
-        old.geometry.dispose();
-      }
-    }
-
-    function clearNeonPaint() {
-      while (paintGroup.children.length > 0) {
-        const m = paintGroup.children[0];
-        paintGroup.remove(m);
-        m.geometry.dispose();
-      }
-    }
-
-    // =========================================================================
-    // 8. SÉLECTEUR DES 5 EXPÉRIENCES MIXED REALITY
-    // =========================================================================
-    function setExperienceMode(mode) {
-      state.experience = mode;
-      document.querySelectorAll('.exp-dock .btn').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById(`exp-btn-${mode}`);
-      if (activeBtn) activeBtn.classList.add('active');
-
-      portalRoot.visible   = (mode === 'all' || mode === 'portal' || mode === 'physics' || mode === 'drones');
-      physicsGroup.visible = (mode === 'all' || mode === 'physics');
-      dronesGroup.visible  = (mode === 'all' || mode === 'drones');
-      solarGroup.visible   = (mode === 'all' || mode === 'solar');
-      paintModeEnabled     = (mode === 'paint');
-
-      const labels = {
-        all: 'Toutes (Hub MR Complet)',
-        portal: 'Fenêtre Murale 3D (Portail)',
-        physics: 'Physique Grab & Throw',
-        drones: 'Invasion de Drones MR',
-        solar: 'Système Solaire Tactile',
-        paint: 'Pinceau Lumière 3D'
-      };
-      document.getElementById('stat-exp').textContent = labels[mode] || mode;
-      playSynthSFX('grab');
-      drawHolographicWristPanel();
-    }
-
-    // =========================================================================
-    // 9. PANNEAU DE CONTRÔLE HOLOGRAPHIQUE 3D EN MIXED REALITY + MANETTES/MAINS
-    // =========================================================================
-    const wristCanvas = document.createElement('canvas');
-    wristCanvas.width = 800;
-    wristCanvas.height = 520;
-    const wristCtx = wristCanvas.getContext('2d');
-    const wristTex = new THREE.CanvasTexture(wristCanvas);
-    wristTex.encoding = THREE.sRGBEncoding;
-
-    const holoMenuGroup = new THREE.Group();
-    holoMenuGroup.position.set(-0.78, 1.28, -0.88);
-    holoMenuGroup.rotation.y = 0.52;
-    scene.add(holoMenuGroup);
-
-    const holoMenuMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.62, 0.40),
-      new THREE.MeshBasicMaterial({ map: wristTex, transparent: true, side: THREE.DoubleSide })
-    );
-    holoMenuGroup.add(holoMenuMesh);
-
-    const holoButtons = [
-      { id: 'all',      label: '🌟 HUB COMPLET',     x: 25,  y: 115, w: 235, h: 85, col: '#0284c7' },
-      { id: 'portal',   label: '🪟 FENÊTRE MUR',     x: 280, y: 115, w: 235, h: 85, col: '#7c3aed' },
-      { id: 'physics',  label: '🎾 PHYSIQUE 3D',     x: 535, y: 115, w: 240, h: 85, col: '#059669' },
-      { id: 'drones',   label: '🛸 DRONES MR',       x: 25,  y: 220, w: 235, h: 85, col: '#dc2626' },
-      { id: 'solar',    label: '🪐 PLANÉTARIUM',     x: 280, y: 220, w: 235, h: 85, col: '#d97706' },
-      { id: 'paint',    label: '🎨 PINCEAU 3D',      x: 535, y: 220, w: 240, h: 85, col: '#db2777' },
-      { id: 'gravity',  label: '🪶 ZÉRO-G / TERRE',  x: 25,  y: 325, w: 235, h: 85, col: '#4f46e5' },
-      { id: 'respawn',  label: '🧱 RÉEMPILER',       x: 280, y: 325, w: 235, h: 85, col: '#0d9488' },
-      { id: 'theme',    label: '🌀 MONDE PORTAIL',   x: 535, y: 325, w: 240, h: 85, col: '#9333ea' },
-      { id: 'recenter', label: '📍 PLACER FENÊTRE SUR CE MUR (DEVANT MOI)', x: 25, y: 425, w: 750, h: 75, col: '#0ea5e9' }
-    ];
-
-    let hoveredHoloBtn = null;
-
-    function drawHolographicWristPanel(uv = null) {
-      const ctx = wristCtx;
-      ctx.clearRect(0, 0, 800, 520);
-
-      ctx.fillStyle = 'rgba(7, 12, 24, 0.92)';
-      ctx.strokeStyle = '#00f2fe';
-      ctx.lineWidth = 6;
-      ctx.fillRect(6, 6, 788, 508);
-      ctx.strokeRect(6, 6, 788, 508);
-
-      ctx.fillStyle = '#0f2942';
-      ctx.fillRect(12, 12, 776, 84);
-      ctx.fillStyle = '#00f2fe';
-      ctx.font = 'bold 25px Segoe UI, sans-serif';
-      ctx.fillText('🥽 META QUEST 3 — TABLEAU HOLOGRAPHIQUE MR', 26, 48);
-      ctx.fillStyle = '#facc15';
-      ctx.font = 'bold 20px Consolas, monospace';
-      ctx.fillText(`SCORE : ${state.score} PTS   |   GRAVITÉ : ${state.zeroGravity ? 'ZÉRO-G (APESANTEUR)' : 'TERRESTRE'}`, 26, 82);
-
-      const cx = uv ? uv.x * 800 : -1;
-      const cy = uv ? (1 - uv.y) * 520 : -1;
-      hoveredHoloBtn = null;
-
-      holoButtons.forEach(b => {
-        const hover = (cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h);
-        if (hover) hoveredHoloBtn = b.id;
-
-        ctx.fillStyle = hover ? '#00f2fe' : b.col;
-        ctx.strokeStyle = hover ? '#ffffff' : '#67e8f9';
-        ctx.lineWidth = hover ? 4 : 2;
-        ctx.fillRect(b.x, b.y, b.w, b.h);
-        ctx.strokeRect(b.x, b.y, b.w, b.h);
-
-        ctx.fillStyle = hover ? '#040710' : '#ffffff';
-        ctx.font = 'bold 21px Segoe UI, sans-serif';
-        ctx.fillText(b.label, b.x + 16, b.y + b.h / 2 + 8);
-      });
-
-      if (uv) {
-        ctx.fillStyle = '#00ffcc';
-        ctx.beginPath();
-        ctx.arc(cx, cy, 9, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      wristTex.needsUpdate = true;
-    }
-    drawHolographicWristPanel();
-
-    function executeHoloButton(id) {
-      if (['all', 'portal', 'physics', 'drones', 'solar', 'paint'].includes(id)) {
-        if (id === 'paint') clearNeonPaint();
-        setExperienceMode(id);
-      } else if (id === 'gravity') {
-        toggleGravityMode();
-      } else if (id === 'respawn') {
-        respawnPhysicsPlayground();
-      } else if (id === 'theme') {
-        CyclePortalDimension();
-      } else if (id === 'recenter') {
-        calibrateWallPortalInFrontOfUser();
-      }
-    }
-
-    // Manettes & Mains (Hand Tracking) Meta Quest 3 avec historique de vitesse 3D pour lancer réaliste !
-    const controllers = [];
-    const raycaster = new THREE.Raycaster();
-    const rotMat = new THREE.Matrix4();
-
-    for (let i = 0; i < 2; i++) {
-      const ctrl = renderer.xr.getController(i);
-      const lineGeom = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(0, 0, -2.2)
-      ]);
-      const laser = new THREE.Line(
-        lineGeom,
-        new THREE.LineBasicMaterial({ color: i === 0 ? 0x00f2fe : 0xec4899 })
-      );
-      ctrl.add(laser);
-
-      const handOrb = new THREE.Mesh(
-        new THREE.SphereGeometry(0.022, 16, 16),
-        new THREE.MeshBasicMaterial({ color: i === 0 ? 0x00f2fe : 0xec4899 })
-      );
-      ctrl.add(handOrb);
-
-      const cState = {
-        ctrl,
-        index: i,
-        selecting: false,
-        grabbedBody: null,
-        grabDistance: 0.25,
-        posHistory: [],
-        ComputedVel: new THREE.Vector3()
-      };
-
-      ctrl.addEventListener('selectstart', () => onControllerSelectStart(cState));
-      ctrl.addEventListener('selectend', () => onControllerSelectEnd(cState));
-      ctrl.addEventListener('squeezestart', () => {
-        // Le bouton Grip (Squeeze) permet soit d'attraper l'objet le plus proche, soit de poser la fenêtre murale !
-        if (!tryGrabNearestObject(cState)) {
-          calibrateWallPortalInFrontOfUser();
+      if (lvl === 1) {
+        game.levelTargetScore = 500;
+        bossGroup.visible = false;
+        for (let i = 0; i < 5; i++) {
+          spawnEnemyTarget('crystal', new THREE.Vector3(-0.8 + i * 0.4, 1.15 + (i % 2) * 0.35, -1.25), vividCols[i]);
         }
-      });
-      ctrl.addEventListener('squeezeend', () => onControllerSelectEnd(cState));
+      } else if (lvl === 2) {
+        game.levelTargetScore = 1000;
+        bossGroup.visible = false;
+        for (let i = 0; i < 6; i++) {
+          spawnEnemyTarget('drone', new THREE.Vector3(-0.9 + i * 0.36, 1.3 + (i % 3) * 0.25, -1.35), 0xff007f);
+        }
+      } else if (lvl === 3) {
+        game.levelTargetScore = 1500;
+        bossGroup.visible = false;
+        // En Zéro-G, les objets flottent dans toute la chambre !
+        physObjects.forEach(o => {
+          o.vel.set((Math.random() - 0.5) * 0.8, 0.4 + Math.random() * 0.5, (Math.random() - 0.5) * 0.8);
+        });
+        for (let i = 0; i < 7; i++) {
+          spawnEnemyTarget('drone', new THREE.Vector3((Math.random() - 0.5) * 1.6, 1.0 + Math.random() * 0.9, -0.7 - Math.random() * 0.9), 0x00f7ff);
+        }
+      } else if (lvl === 4) {
+        game.levelTargetScore = 2000;
+        game.bossHP = 1000;
+        bossGroup.visible = true;
+        for (let i = 0; i < 4; i++) {
+          spawnEnemyTarget('drone', new THREE.Vector3(-0.75 + i * 0.5, 1.4, -1.3), 0xffbe0b);
+        }
+      }
 
-      scene.add(ctrl);
-      controllers.push(cState);
+      update2DHUD();
+      playSFX('level_up');
+      render3DHoloHUD(null, `🚀 LEVEL ${lvl} ACTIVÉ !`);
     }
 
-    function tryGrabNearestObject(cState) {
-      const ctrlPos = new THREE.Vector3().setFromMatrixPosition(cState.ctrl.matrixWorld);
-      let best = null;
-      let bestDist = 0.32;
-      for (const b of physBodies) {
-        const d = b.mesh.position.distanceTo(ctrlPos);
-        if (d < bestDist) {
-          bestDist = d;
-          best = b;
-        }
+    function addGameScore(pts, hitPos, colorHex = 0x00ff88) {
+      game.score += pts;
+      game.levelScore += pts;
+      if (hitPos) spawnVividExplosion(hitPos, colorHex, 24);
+
+      if (game.level < 4 && game.levelScore >= game.levelTargetScore) {
+        startLevel(game.level + 1);
+        return;
+      }
+      update2DHUD();
+      render3DHoloHUD();
+    }
+
+    function update2DHUD() {
+      const titles = {
+        1: ['LEVEL 1 — BRÈCHE CRISTALLINE', 'Frappez les Cristaux (Mains, Pieds, Balles ou Lasers)'],
+        2: ['LEVEL 2 — ASSAUT DES SENTINELLES', 'Détruisez les Drones mobiles qui rebondissent sur vos murs !'],
+        3: ['LEVEL 3 — TEMPÊTE ZÉRO-G & SABRES', 'Apesanteur active ! Tranchez tout avec vos Sabres Néon !'],
+        4: ['👑 LEVEL 4 — BOSS TITAN DIMENSIONNEL', 'Détruisez le Titan Géant derrière la brèche de votre mur !']
+      };
+      document.getElementById('hud-lvl-title').textContent = titles[game.level][0];
+      document.getElementById('hud-lvl-sub').textContent = titles[game.level][1];
+      document.getElementById('hud-score').textContent = `${game.score} PTS`;
+      document.getElementById('hud-hp').textContent = `${game.playerHP} %`;
+      const pct = game.level === 4
+        ? ((game.bossMaxHP - game.bossHP) / game.bossMaxHP) * 100
+        : Math.min(100, (game.levelScore / game.levelTargetScore) * 100);
+      document.getElementById('hud-lvl-bar').style.width = `${pct}%`;
+    }
+
+    // =========================================================================
+    // 8. INTERACTIONS MAINS / MANETTES / SOURIS & CALIBRATION CHAMBRE 3D
+    // =========================================================================
+    function tryGrabNearestBall(hData) {
+      const p = new THREE.Vector3().setFromMatrixPosition(hData.ctrl.matrixWorld);
+      let best = null, minD = 0.34;
+      for (const o of physObjects) {
+        const d = o.mesh.position.distanceTo(p);
+        if (d < minD) { minD = d; best = o; }
       }
       if (best) {
-        best.grabbedBy = cState.index;
-        cState.grabbedBody = best;
-        cState.grabDistance = 0.08;
-        playSynthSFX('grab');
+        best.grabbedBy = hData.index;
+        hData.grabbedObj = best;
+        hData.grabDist = 0.12;
+        playSFX('saber', 1.2);
         return true;
       }
       return false;
     }
 
-    function onControllerSelectStart(cState) {
-      cState.selecting = true;
-      const ctrl = cState.ctrl;
-      rotMat.identity().extractRotation(ctrl.matrixWorld);
-      raycaster.ray.origin.setFromMatrixPosition(ctrl.matrixWorld);
-      raycaster.ray.direction.set(0, 0, -1).applyMatrix4(rotMat);
+    function onHandTriggerDown(hData) {
+      tempRot.identity().extractRotation(hData.ctrl.matrixWorld);
+      raycaster.ray.origin.setFromMatrixPosition(hData.ctrl.matrixWorld);
+      raycaster.ray.direction.set(0, 0, -1).applyMatrix4(tempRot);
 
-      // 1. Clic sur le Panneau Holographique 3D
-      const menuHits = raycaster.intersectObject(holoMenuMesh, false);
-      if (menuHits.length > 0 && menuHits[0].uv) {
-        drawHolographicWristPanel(menuHits[0].uv);
-        if (hoveredHoloBtn) {
-          executeHoloButton(hoveredHoloBtn);
+      // 1. Clic sur le Tableau Holographique 3D des Niveaux
+      const hudHits = raycaster.intersectObject(holoHUDMesh, false);
+      if (hudHits.length > 0 && hudHits[0].uv) {
+        render3DHoloHUD(hudHits[0].uv);
+        if (hovered3DBtn) {
+          if (hovered3DBtn.startsWith('lvl')) startLevel(parseInt(hovered3DBtn.replace('lvl', ''), 10));
+          else if (hovered3DBtn === 'calib') calibrateRoomToUser();
+          else if (hovered3DBtn === 'weap') cycleWeaponMode();
           return;
         }
       }
 
-      // 2. Si on est en mode Peinture 3D Néon, commencer le tracé
-      if (paintModeEnabled) {
-        lastPaintPos[cState.index] = null;
-        return;
-      }
-
-      // 3. Saisie directe au contact de la main (< 24 cm)
-      if (tryGrabNearestObject(cState)) return;
-
-      // 4. Saisie Télékinésique à distance au rayon laser (sur une sphère, un cube ou une planète !)
-      const meshes = physBodies.map(b => b.mesh);
-      const hits = raycaster.intersectObjects(meshes, false);
-      if (hits.length > 0) {
-        const found = physBodies.find(b => b.mesh === hits[0].object);
+      // 2. Saisie directe ou à distance d'une sphère/cristal sur le bureau
+      if (tryGrabNearestBall(hData)) return;
+      const objHits = raycaster.intersectObjects(physObjects.map(o => o.mesh), false);
+      if (objHits.length > 0) {
+        const found = physObjects.find(o => o.mesh === objHits[0].object);
         if (found) {
-          found.grabbedBy = cState.index;
-          cState.grabbedBody = found;
-          // Ramener l'objet à portée de main (22 cm devant la manette/main) pour pouvoir le lancer facilement !
-          cState.grabDistance = 0.22;
-          playSynthSFX('grab');
+          found.grabbedBy = hData.index;
+          hData.grabbedObj = found;
+          hData.grabDist = 0.24;
+          playSFX('saber', 1.3);
           return;
         }
       }
 
-      // 5. Sinon, tirer un Orbe de Plasma lumineux dans la direction de la main / manette !
-      const spawnPt = raycaster.ray.origin.clone().addScaledVector(raycaster.ray.direction, 0.18);
-      const orb = createPhysicsObject('sphere', spawnPt, cState.index === 0 ? 0x00f2fe : 0xec4899, 0.052);
-      orb.vel.copy(raycaster.ray.direction).multiplyScalar(8.5);
-      playSynthSFX('laser');
-    }
-
-    function onControllerSelectEnd(cState) {
-      cState.selecting = false;
-      lastPaintPos[cState.index] = null;
-
-      if (cState.grabbedBody) {
-        const b = cState.grabbedBody;
-        b.grabbedBy = -1;
-        // Appliquer la vraie vitesse physique du mouvement du bras (amplifiée pour un lancer dynamique !)
-        b.vel.copy(cState.ComputedVel).multiplyScalar(1.38);
-        b.angVel.set(
-          (Math.random() - 0.5) * 8,
-          (Math.random() - 0.5) * 8,
-          (Math.random() - 0.5) * 8
-        );
-        cState.grabbedBody = null;
-        playSynthSFX('throw');
+      // 3. Tir d'un Orbe Plasma Vivid haute vitesse (rebondit sur vos vrais murs et votre bureau !)
+      if (weaponMode !== 'saber') {
+        const spawnPt = raycaster.ray.origin.clone().addScaledVector(raycaster.ray.direction, 0.20);
+        const bolt = spawnVividPhysObject('sphere', spawnPt, hData.colorHex, 0.048);
+        bolt.vel.copy(raycaster.ray.direction).multiplyScalar(11.5);
+        playSFX('shoot', hData.index === 0 ? 1.0 : 1.18);
       }
     }
 
-    function calibrateWallPortalInFrontOfUser() {
+    function onHandTriggerUp(hData) {
+      if (hData.grabbedObj) {
+        const o = hData.grabbedObj;
+        o.grabbedBy = -1;
+        o.vel.copy(hData.vel).multiplyScalar(1.45);
+        hData.grabbedObj = null;
+        playSFX('shoot', 0.75);
+      }
+    }
+
+    function calibrateRoomToUser() {
       const xrCam = renderer.xr.isPresenting ? renderer.xr.getCamera(camera) : camera;
       const headPos = new THREE.Vector3();
       const headQuat = new THREE.Quaternion();
@@ -1219,415 +1286,367 @@
       if (forward.lengthSq() < 0.001) forward.set(0, 0, -1);
       forward.normalize();
 
-      const yaw = Math.atan2(-forward.x, -forward.z);
+      // Aligner le bureau devant le joueur et le mur portail à 1.9m
+      ROOM_BOUNDS.deskX = headPos.x + forward.x * 0.82;
+      ROOM_BOUNDS.deskZ = headPos.z + forward.z * 0.82;
+      ROOM_BOUNDS.deskY = Math.max(0.58, headPos.y - 0.52);
 
-      // Placer la Fenêtre Murale à 1.75m devant vous sur votre mur
-      portalRoot.position.copy(headPos).addScaledVector(forward, 1.75);
-      portalRoot.position.y = Math.max(1.25, headPos.y);
-      portalRoot.rotation.set(0, yaw, 0);
+      realDeskMesh.position.set(ROOM_BOUNDS.deskX, ROOM_BOUNDS.deskY, ROOM_BOUNDS.deskZ);
+      deskWire.position.copy(realDeskMesh.position);
 
-      // Placer la table d'objets à 78cm devant vous
-      physicsGroup.position.set(headPos.x, 0, headPos.z);
-      physicsGroup.rotation.set(0, yaw, 0);
-
-      playSynthSFX('portal');
+      playSFX('level_up');
+      render3DHoloHUD(null, '✅ MURS & BUREAU CALIBRÉS !');
     }
 
-    // Interaction Souris sur PC (Cliquer-glisser-lancer & Tir d'orbe avec Espace)
-    const mouseVec = new THREE.Vector2();
-    let mouseGrabbedBody = null;
-    let lastMouseWorld = new THREE.Vector3();
-    let mouseVel = new THREE.Vector3();
-
+    // Tir au clic / Espace sur PC pour tester aussi sans casque
     window.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') shootPlasmaFromCamera();
+      if (e.code === 'Space') shootFromCamera();
     });
-
-    function shootPlasmaFromCamera() {
-      const dir = new THREE.Vector3();
-      camera.getWorldDirection(dir);
-      const start = camera.position.clone().addScaledVector(dir, 0.4);
-      const orb = createPhysicsObject('sphere', start, 0x00f2fe, 0.055);
-      orb.vel.copy(dir).multiplyScalar(9.2);
-      document.getElementById('stat-objs').textContent = `${physBodies.length} actifs`;
-      playSynthSFX('laser');
-    }
-
     canvas.addEventListener('pointerdown', (e) => {
       if (renderer.xr.isPresenting) return;
       const rect = canvas.getBoundingClientRect();
-      mouseVec.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouseVec.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-      raycaster.setFromCamera(mouseVec, camera);
-
-      const menuHits = raycaster.intersectObject(holoMenuMesh, false);
-      if (menuHits.length > 0 && menuHits[0].uv) {
-        drawHolographicWristPanel(menuHits[0].uv);
-        if (hoveredHoloBtn) {
-          executeHoloButton(hoveredHoloBtn);
+      const m = new THREE.Vector2(
+        ((e.clientX - rect.left) / rect.width) * 2 - 1,
+        -((e.clientY - rect.top) / rect.height) * 2 + 1
+      );
+      raycaster.setFromCamera(m, camera);
+      const hudHits = raycaster.intersectObject(holoHUDMesh, false);
+      if (hudHits.length > 0 && hudHits[0].uv) {
+        render3DHoloHUD(hudHits[0].uv);
+        if (hovered3DBtn) {
+          if (hovered3DBtn.startsWith('lvl')) startLevel(parseInt(hovered3DBtn.replace('lvl', ''), 10));
+          else if (hovered3DBtn === 'calib') calibrateRoomToUser();
+          else if (hovered3DBtn === 'weap') cycleWeaponMode();
           return;
         }
       }
-
-      const meshes = physBodies.map(b => b.mesh);
-      const hits = raycaster.intersectObjects(meshes, false);
-      if (hits.length > 0) {
-        const found = physBodies.find(b => b.mesh === hits[0].object);
-        if (found) {
-          controls.enabled = false;
-          mouseGrabbedBody = found;
-          found.grabbedBy = 99;
-          lastMouseWorld.copy(found.mesh.position);
-          playSynthSFX('grab');
-        }
-      }
+      shootFromCamera(raycaster.ray.direction);
     });
 
-    canvas.addEventListener('pointermove', (e) => {
-      if (!mouseGrabbedBody || renderer.xr.isPresenting) return;
-      const rect = canvas.getBoundingClientRect();
-      mouseVec.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouseVec.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-      raycaster.setFromCamera(mouseVec, camera);
-      const targetPt = raycaster.ray.origin.clone().addScaledVector(raycaster.ray.direction, 1.9);
-      mouseVel.subVectors(targetPt, lastMouseWorld).multiplyScalar(22);
-      lastMouseWorld.copy(targetPt);
-      mouseGrabbedBody.mesh.position.copy(targetPt);
-    });
-
-    window.addEventListener('pointerup', () => {
-      if (mouseGrabbedBody) {
-        mouseGrabbedBody.grabbedBy = -1;
-        mouseGrabbedBody.vel.copy(mouseVel);
-        mouseGrabbedBody = null;
-        controls.enabled = true;
-        playSynthSFX('throw');
-      }
-    });
+    function shootFromCamera(customDir = null) {
+      const dir = customDir ? customDir.clone() : new THREE.Vector3();
+      if (!customDir) camera.getWorldDirection(dir);
+      const start = camera.position.clone().addScaledVector(dir, 0.35);
+      const bolt = spawnVividPhysObject('sphere', start, 0x00f7ff, 0.052);
+      bolt.vel.copy(dir).multiplyScalar(11.0);
+      playSFX('shoot');
+    }
 
     // =========================================================================
-    // 10. LANCEMENT MIXED REALITY SUR META QUEST 3 (`immersive-ar`)
+    // 9. LANCEMENT IMMERSIF PLEIN ÉCRAN 360° SUR META QUEST 3 (`immersive-ar`)
+    //    Supprime 100 % de la fenêtre du navigateur + Active Mesh/Plane Detection !
     // =========================================================================
-    const isQuest = /Quest|OculusBrowser|Pacific|Hollywood|Eureka/i.test(navigator.userAgent);
-
-    async function launchQuestMR(mode = 'immersive-ar') {
-      ensureAudio();
+    async function startFullGameMR(requestedMode = 'immersive-ar') {
+      initAudio();
       if (!('xr' in navigator)) {
-        if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-          location.href = `https://${location.hostname}:9443`;
-          return;
-        }
-        openLinkModal();
+        openInstallModal();
         return;
       }
-
       try {
-        const current = renderer.xr.getSession();
-        if (current) {
-          await current.end();
-          return;
-        }
+        const cur = renderer.xr.getSession();
+        if (cur) { await cur.end(); return; }
 
-        let targetMode = mode;
-        let ok = await navigator.xr.isSessionSupported(targetMode);
-        if (!ok && targetMode === 'immersive-ar') {
+        let mode = requestedMode;
+        let ok = await navigator.xr.isSessionSupported(mode);
+        if (!ok && mode === 'immersive-ar') {
           ok = await navigator.xr.isSessionSupported('immersive-vr');
-          if (ok) targetMode = 'immersive-vr';
+          if (ok) mode = 'immersive-vr';
         }
-        if (!ok) {
-          openLinkModal();
-          return;
-        }
+        if (!ok) { openInstallModal(); return; }
 
-        const session = await navigator.xr.requestSession(targetMode, {
-          optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking', 'hit-test', 'anchors']
+        // Demander toutes les fonctionnalités spatiales du Meta Quest 3 :
+        // plane-detection (vrais murs/bureau), mesh-detection (scan 3D de la pièce), hand-tracking (mains 25 joints)
+        const session = await navigator.xr.requestSession(mode, {
+          optionalFeatures: [
+            'local-floor',
+            'bounded-floor',
+            'hand-tracking',
+            'hit-test',
+            'plane-detection',
+            'mesh-detection',
+            'anchors'
+          ]
         });
 
-        document.getElementById('quest-welcome-card').style.display = 'none';
-        document.getElementById('btn-enter-mr').textContent = '🟢 MIXED REALITY ACTIVE (Quitter)';
+        document.getElementById('welcome-card').style.display = 'none';
+        document.getElementById('btn-start-mr').textContent = '🟢 JEU MR EN COURS (Quitter)';
 
-        if (targetMode === 'immersive-ar') {
-          // FOND 100% TRANSPARENT POUR LE PASSTHROUGH COULEUR DU META QUEST 3 !
+        if (mode === 'immersive-ar') {
           scene.background = null;
           renderer.setClearColor(0x000000, 0.0);
-          desktopGrid.visible = false;
         } else {
-          scene.background = desktopBg;
-          renderer.setClearColor(0x060a14, 1.0);
+          scene.background = darkStudioColor;
+          renderer.setClearColor(0x040612, 1.0);
         }
 
-        state.needsWallCalibration = true;
-
         session.addEventListener('end', () => {
-          scene.background = desktopBg;
-          renderer.setClearColor(0x060a14, 1.0);
-          desktopGrid.visible = true;
-          document.getElementById('btn-enter-mr').textContent = '🥽 ENTRER EN MIXED REALITY (Passthrough Quest 3)';
-          if (isQuest) document.getElementById('quest-welcome-card').style.display = 'block';
+          scene.background = darkStudioColor;
+          renderer.setClearColor(0x040612, 1.0);
+          document.getElementById('btn-start-mr').textContent = '🥽 JOUER EN MIXED REALITY (PLEIN ÉCRAN 360°)';
+          document.getElementById('welcome-card').style.display = 'block';
         });
 
         await renderer.xr.setSession(session);
-        playSynthSFX('portal');
+        startLevel(game.level);
       } catch (err) {
-        openLinkModal();
+        openInstallModal();
       }
     }
 
-    // Portail Réseau & QR Code
-    async function refreshServerLinks() {
-      try {
-        const res = await fetch(`/api/info${isQuest ? '?quest=1' : ''}`);
-        const info = await res.json();
-        const localEl = document.getElementById('url-local');
-        const badge = document.getElementById('quest-badge-live');
-
-        if (localEl && info.httpsUrl) localEl.textContent = info.httpsUrl;
-        if (info.questConnected || isQuest) {
-          badge.textContent = '🟢 QUEST 3 CONNECTÉ';
-        }
-      } catch (e) {}
-    }
-
-    function openLinkModal() {
-      refreshServerLinks();
-      document.getElementById('link-modal').style.display = 'flex';
-    }
-    function closeLinkModal() {
-      document.getElementById('link-modal').style.display = 'none';
-    }
-    function copyUrl(id) {
-      const txt = document.getElementById(id)?.textContent || '';
-      if (navigator.clipboard && txt) {
-        navigator.clipboard.writeText(txt.split(' ')[0]);
-      }
-    }
-
-    setInterval(refreshServerLinks, 3000);
-    refreshServerLinks();
+    startLevel(1);
 
     // =========================================================================
-    // 11. BOUCLE D'ANIMATION TEMPS RÉEL 90 Hz / 120 Hz (PHYSIQUE + PORTAIL + XR)
+    // 10. BOUCLE PRINCIPALE 90 Hz / 120 Hz : CORPS IK + MURS 3D + PHYSIQUE + NIVEAUX
     // =========================================================================
-    let prevTime = performance.now();
+    let lastT = performance.now();
 
-    function animate(now) {
+    function animate(now, xrFrame) {
       const t = now || performance.now();
-      const dt = Math.min(0.035, Math.max(0.001, (t - prevTime) / 1000));
-      prevTime = t;
+      const dt = Math.min(0.035, Math.max(0.001, (t - lastT) / 1000));
+      lastT = t;
+      const timeSec = t * 0.001;
 
-      // Calibration automatique au 1er frame en Mixed Reality
-      if (renderer.xr.isPresenting && state.needsWallCalibration) {
-        calibrateWallPortalInFrontOfUser();
-        state.needsWallCalibration = false;
+      // 1. Si le Meta Quest 3 renvoie des plans réels scannés (frame.detectedPlanes : table/murs), synchroniser le bureau !
+      if (xrFrame && xrFrame.detectedPlanes) {
+        document.getElementById('hud-scan').textContent = `${xrFrame.detectedPlanes.size} Surfaces Réelles Quest 3`;
       }
 
-      // 1. Animation de l'univers 3D derrière la fenêtre murale
-      saturnPlanet.rotation.y += dt * 0.28;
-      saturnRing.rotation.z -= dt * 0.15;
-      portalCoreTarget.rotation.x += dt * 0.9;
-      portalCoreTarget.rotation.y += dt * 1.2;
+      // 2. Mettre à jour votre Corps Complet 3D (Torse, Bras IK, Jambes qui marchent et Bottes !)
+      updateFullBodyAvatarIK(dt, timeSec);
 
-      portalArches.forEach((arch, idx) => {
-        arch.rotation.z = Math.sin(t * 0.0008 + idx * 0.5) * 0.08;
-      });
-
-      portalAsteroids.forEach(a => {
-        a.angle += dt * a.speed;
-        a.mesh.position.x = Math.cos(a.angle) * a.rad;
-        a.mesh.position.y = Math.sin(a.angle) * (a.rad * 0.7);
-        a.mesh.rotation.x += dt;
-        a.mesh.rotation.y += dt * 0.8;
-      });
-
-      // 2. Suivi de la vitesse des manettes/mains Meta Quest 3 + Saisie & Peinture 3D
+      // 3. Mettre à jour les Mains, Sabres Néon & Vélocité de lancer
       if (renderer.xr.isPresenting) {
         let menuUV = null;
-        for (const cState of controllers) {
-          const pos = new THREE.Vector3().setFromMatrixPosition(cState.ctrl.matrixWorld);
-          cState.posHistory.push({ pos: pos.clone(), time: t });
-          if (cState.posHistory.length > 7) cState.posHistory.shift();
+        xrHandsData.forEach(h => {
+          h.worldPos.setFromMatrixPosition(h.ctrl.matrixWorld);
+          h.saberBlade.getWorldPosition(h.bladeTipWorld);
 
-          if (cState.posHistory.length >= 2) {
-            const oldest = cState.posHistory[0];
-            const newest = cState.posHistory[cState.posHistory.length - 1];
-            const elapsed = Math.max(0.008, (newest.time - oldest.time) / 1000);
-            cState.ComputedVel.subVectors(newest.pos, oldest.pos).divideScalar(elapsed);
+          h.history.push({ p: h.worldPos.clone(), time: t });
+          if (h.history.length > 7) h.history.shift();
+          if (h.history.length >= 2) {
+            const first = h.history[0], last = h.history[h.history.length - 1];
+            h.vel.subVectors(last.p, first.p).divideScalar(Math.max(0.008, (last.time - first.time) / 1000));
           }
 
-          // Raycast sur le panneau holographique 3D
-          rotMat.identity().extractRotation(cState.ctrl.matrixWorld);
-          raycaster.ray.origin.copy(pos);
-          raycaster.ray.direction.set(0, 0, -1).applyMatrix4(rotMat);
-          const hits = raycaster.intersectObject(holoMenuMesh, false);
+          tempRot.identity().extractRotation(h.ctrl.matrixWorld);
+          raycaster.ray.origin.copy(h.worldPos);
+          raycaster.ray.direction.set(0, 0, -1).applyMatrix4(tempRot);
+
+          const hits = raycaster.intersectObject(holoHUDMesh, false);
           if (hits.length > 0 && hits[0].uv) menuUV = hits[0].uv;
 
-          // Déplacement de l'objet tenu dans la main
-          if (cState.grabbedBody) {
-            const holdPt = pos.clone().addScaledVector(raycaster.ray.direction, cState.grabDistance);
-            const localPt = physicsGroup.worldToLocal(holdPt);
-            cState.grabbedBody.mesh.position.copy(localPt);
-            cState.grabbedBody.vel.set(0, 0, 0);
+          if (h.grabbedObj) {
+            h.grabbedObj.mesh.position.copy(
+              h.worldPos.clone().addScaledVector(raycaster.ray.direction, h.grabDist)
+            );
+            h.grabbedObj.vel.set(0, 0, 0);
           }
-
-          // Peinture Lumineuse Néon 3D dans l'air
-          if (paintModeEnabled && cState.selecting) {
-            const tipPt = pos.clone().addScaledVector(raycaster.ray.direction, 0.12);
-            if (lastPaintPos[cState.index]) {
-              addNeonBrushSegment(lastPaintPos[cState.index], tipPt);
-            }
-            lastPaintPos[cState.index] = tipPt.clone();
-          }
-        }
-        drawHolographicWristPanel(menuUV);
+        });
+        render3DHoloHUD(menuUV);
       }
 
-      // 3. Simulation Physique 3D (Gravité, Rebonds Sol/Table, Collisions, Traversée de la Fenêtre Murale !)
-      const gravityY = state.zeroGravity ? 0.0 : -9.81;
+      // 4. Animation du Portail Mural & Anneaux Vivid
+      bgPlanet.rotation.y += dt * 0.35;
+      bgRing.rotation.z -= dt * 0.2;
+      deepRings.forEach((r, idx) => {
+        r.rotation.z = timeSec * (idx % 2 === 0 ? 0.6 : -0.6) + idx;
+      });
 
-      for (let i = 0; i < physBodies.length; i++) {
-        const b = physBodies[i];
-        if (b.grabbedBy !== -1) continue;
+      // 5. Physique 3D Temps Réel : Rebonds sur vos Vrais Murs, votre Bureau, le Sol + Frappe des Mains et des Pieds !
+      const gY = game.zeroGravity ? 0.0 : -9.2;
 
-        b.vel.y += gravityY * dt;
-        b.vel.multiplyScalar(state.zeroGravity ? 0.996 : 0.992);
-        b.mesh.position.addScaledVector(b.vel, dt);
+      for (let i = physObjects.length - 1; i >= 0; i--) {
+        const o = physObjects[i];
+        if (o.grabbedBy !== -1) continue;
 
-        b.mesh.rotation.x += b.angVel.x * dt;
-        b.mesh.rotation.y += b.angVel.y * dt;
-        b.mesh.rotation.z += b.angVel.z * dt;
+        o.vel.y += gY * dt;
+        o.vel.multiplyScalar(game.zeroGravity ? 0.997 : 0.992);
+        o.mesh.position.addScaledVector(o.vel, dt);
+        o.mesh.rotation.x += o.angVel.x * dt;
+        o.mesh.rotation.y += o.angVel.y * dt;
 
-        // Rebond sur le piédestal / table (Y = 0.755m)
+        const p = o.mesh.position;
+
+        // A) COLLISION AVEC VOS 2 PIEDS / JAMBES (Foot Kick Physics !)
+        legs.forEach(leg => {
+          const distFoot = p.distanceTo(leg.footWorldPos);
+          if (distFoot < o.radius + 0.14) {
+            const kickDir = p.clone().sub(leg.footWorldPos).normalize();
+            kickDir.y = Math.max(0.35, kickDir.y);
+            const kickPower = Math.max(3.8, leg.footVel.length() * 1.6);
+            o.vel.copy(kickDir.multiplyScalar(kickPower));
+            playSFX('wall_hit', 1.4);
+          }
+        });
+
+        // B) COLLISION AVEC VOS MAINS / SABRES NÉON (Hand Punch / Saber Hit !)
+        xrHandsData.forEach(h => {
+          if (p.distanceTo(h.worldPos) < o.radius + 0.12 || (h.saberBlade.visible && p.distanceTo(h.bladeTipWorld) < o.radius + 0.22)) {
+            const hitDir = p.clone().sub(h.worldPos).normalize();
+            const hitSpeed = Math.max(5.0, h.vel.length() * 1.5);
+            o.vel.copy(hitDir.multiplyScalar(hitSpeed));
+            playSFX('saber', 1.1);
+          }
+        });
+
+        // C) REBOND SUR VOTRE VRAI BUREAU (Table Collider + Onde de Choc Vivid !)
         if (
-          Math.abs(b.mesh.position.x) < 0.56 &&
-          Math.abs(b.mesh.position.z - (-0.82)) < 0.29 &&
-          b.mesh.position.y - b.radius < 0.755 &&
-          b.mesh.position.y > 0.68 &&
-          b.vel.y < 0
+          Math.abs(p.x - ROOM_BOUNDS.deskX) < ROOM_BOUNDS.deskW / 2 &&
+          Math.abs(p.z - ROOM_BOUNDS.deskZ) < ROOM_BOUNDS.deskD / 2 &&
+          p.y - o.radius < ROOM_BOUNDS.deskY + 0.015 &&
+          p.y > ROOM_BOUNDS.deskY - 0.12 &&
+          o.vel.y < 0
         ) {
-          b.mesh.position.y = 0.755 + b.radius;
-          if (Math.abs(b.vel.y) > 0.6) playSynthSFX('bounce', Math.abs(b.vel.y));
-          b.vel.y = -b.vel.y * 0.68;
-          b.vel.x *= 0.88;
-          b.vel.z *= 0.88;
+          p.y = ROOM_BOUNDS.deskY + 0.015 + o.radius;
+          if (Math.abs(o.vel.y) > 0.8) {
+            playSFX('wall_hit', 1.2);
+            spawnWallImpactRipple(new THREE.Vector3(p.x, ROOM_BOUNDS.deskY + 0.02, p.z), new THREE.Euler(-Math.PI / 2, 0, 0), 0x00ff88);
+          }
+          o.vel.y = -o.vel.y * 0.75;
         }
 
-        // Rebond sur votre vrai sol (Y = 0)
-        if (b.mesh.position.y - b.radius < 0) {
-          b.mesh.position.y = b.radius;
-          if (Math.abs(b.vel.y) > 0.7) playSynthSFX('bounce', Math.abs(b.vel.y));
-          b.vel.y = -b.vel.y * 0.74;
-          b.vel.x *= 0.92;
-          b.vel.z *= 0.92;
+        // D) REBOND SUR VOTRE VRAI SOL
+        if (p.y - o.radius < ROOM_BOUNDS.floorY) {
+          p.y = ROOM_BOUNDS.floorY + o.radius;
+          if (Math.abs(o.vel.y) > 0.9) {
+            playSFX('wall_hit', 0.9);
+            spawnWallImpactRipple(new THREE.Vector3(p.x, 0.01, p.z), new THREE.Euler(-Math.PI / 2, 0, 0), o.colorHex);
+          }
+          o.vel.y = -o.vel.y * 0.78;
         }
 
-        // Vérifier si l'objet traverse la Fenêtre Dimensionnelle Murale !
-        const worldPos = new THREE.Vector3();
-        b.mesh.getWorldPosition(worldPos);
-        const portalLocal = portalRoot.worldToLocal(worldPos.clone());
-        if (
-          !b.enteredPortal &&
-          portalLocal.z < 0 && portalLocal.z > -1.2 &&
-          Math.abs(portalLocal.x) < WIN_W / 2 &&
-          Math.abs(portalLocal.y) < WIN_H / 2
-        ) {
-          b.enteredPortal = true;
-          b.mesh.renderOrder = 2;
-          addScore(50);
-          playSynthSFX('portal');
-          spawnExplosion3D(worldPos, 0x00f2fe);
+        // E) REBOND SUR VOS VRAIS MURS GAUCHE ET DROITE (avec Onde de Choc Néon sur le mur !)
+        if (p.x - o.radius < ROOM_BOUNDS.minX) {
+          p.x = ROOM_BOUNDS.minX + o.radius;
+          o.vel.x = Math.abs(o.vel.x) * 0.82;
+          playSFX('wall_hit', 1.1);
+          spawnWallImpactRipple(new THREE.Vector3(ROOM_BOUNDS.minX + 0.01, p.y, p.z), new THREE.Euler(0, Math.PI / 2, 0), 0x00f7ff);
+        } else if (p.x + o.radius > ROOM_BOUNDS.maxX) {
+          p.x = ROOM_BOUNDS.maxX - o.radius;
+          o.vel.x = -Math.abs(o.vel.x) * 0.82;
+          playSFX('wall_hit', 1.1);
+          spawnWallImpactRipple(new THREE.Vector3(ROOM_BOUNDS.maxX - 0.01, p.y, p.z), new THREE.Euler(0, -Math.PI / 2, 0), 0xff007f);
         }
 
-        // Vérifier panier de basket holographique !
-        const hoopWorld = new THREE.Vector3();
-        hoopRim.getWorldPosition(hoopWorld);
-        if (worldPos.distanceTo(hoopWorld) < 0.21 && b.vel.y < -0.5) {
-          addScore(100);
-          spawnExplosion3D(hoopWorld, 0xf97316);
-          b.vel.y = -1.5;
-        }
-
-        // Collisions élastiques entre les objets 3D (chamboule-tout !)
-        for (let j = i + 1; j < physBodies.length; j++) {
-          const other = physBodies[j];
-          const diff = new THREE.Vector3().subVectors(b.mesh.position, other.mesh.position);
-          const minDist = b.radius + other.radius;
-          const dist = diff.length();
-          if (dist > 0.0001 && dist < minDist) {
-            const norm = diff.divideScalar(dist);
-            const overlap = minDist - dist;
-            if (b.grabbedBy === -1) b.mesh.position.addScaledVector(norm, overlap * 0.5);
-            if (other.grabbedBy === -1) other.mesh.position.addScaledVector(norm, -overlap * 0.5);
-
-            const relVel = new THREE.Vector3().subVectors(b.vel, other.vel);
-            const sepVel = relVel.dot(norm);
-            if (sepVel < 0) {
-              const impulse = norm.multiplyScalar(-sepVel * 0.82);
-              if (b.grabbedBy === -1) b.vel.add(impulse);
-              if (other.grabbedBy === -1) other.vel.sub(impulse);
-              if (-sepVel > 1.1) playSynthSFX('bounce', -sepVel * 0.6);
-            }
+        // F) REBOND SUR LE MUR D'EN FACE (Sauf si la balle passe À TRAVERS la Fenêtre du Portail !)
+        if (p.z - o.radius < ROOM_BOUNDS.minZ) {
+          const inWindowX = Math.abs(p.x - portalRoot.position.x) < PORTAL_W / 2;
+          const inWindowY = Math.abs(p.y - portalRoot.position.y) < PORTAL_H / 2;
+          if (!inWindowX || !inWindowY) {
+            p.z = ROOM_BOUNDS.minZ + o.radius;
+            o.vel.z = Math.abs(o.vel.z) * 0.82;
+            playSFX('wall_hit', 1.0);
+            spawnWallImpactRipple(new THREE.Vector3(p.x, p.y, ROOM_BOUNDS.minZ + 0.01), new THREE.Euler(0, 0, 0), 0xffbe0b);
+          } else {
+            o.mesh.renderOrder = 2;
           }
         }
       }
 
-      // 4. Animation & Collision des Drones Holographiques
-      if (dronesGroup.visible) {
-        activeDrones.forEach((d, idx) => {
-          d.baseAngle += dt * d.speed;
-          d.group.position.x = Math.sin(d.baseAngle) * 1.15;
-          d.group.position.y = 1.35 + Math.sin(d.baseAngle * 2.1 + idx) * 0.28;
-          d.group.position.z = -1.15 - Math.cos(d.baseAngle) * 0.45;
-          d.group.lookAt(camera.position);
-          d.ring.rotation.z += dt * 4.0;
+      // 6. Mise à jour des Ennemis (Cristaux & Drones) + Collisions avec Balles, Sabres et Pieds
+      for (let i = enemies.length - 1; i >= 0; i--) {
+        const e = enemies[i];
+        e.phase += dt * 2.2;
+        e.core.rotation.x += dt * 1.5;
+        e.core.rotation.y += dt * 2.0;
+        e.halo.rotation.z -= dt * 3.0;
 
-          // Vérifier si une balle / orbe lancée frappe le drone !
-          const dWorld = new THREE.Vector3();
-          d.group.getWorldPosition(dWorld);
-          for (const b of physBodies) {
-            const bWorld = new THREE.Vector3();
-            b.mesh.getWorldPosition(bWorld);
-            if (bWorld.distanceTo(dWorld) < d.radius + b.radius && b.vel.length() > 1.2) {
-              addScore(150);
-              spawnExplosion3D(dWorld, 0xff2a55);
-              d.baseAngle += Math.PI; // Le drone réapparaît plus loin
-              b.vel.multiplyScalar(-0.6);
+        if (e.type === 'drone') {
+          e.group.position.addScaledVector(e.vel, dt);
+          if (e.group.position.x < ROOM_BOUNDS.minX + 0.25 || e.group.position.x > ROOM_BOUNDS.maxX - 0.25) e.vel.x *= -1;
+          if (e.group.position.y < 0.7 || e.group.position.y > 2.2) e.vel.y *= -1;
+          if (e.group.position.z < ROOM_BOUNDS.minZ + 0.2 || e.group.position.z > -0.5) e.vel.z *= -1;
+        } else {
+          e.group.position.y += Math.sin(e.phase) * 0.0025;
+        }
+
+        const ePos = e.group.position;
+        let destroyed = false;
+
+        // Touché par une sphère/tir lancé par le joueur
+        for (const o of physObjects) {
+          if (o.vel.length() > 1.4 && o.mesh.position.distanceTo(ePos) < e.radius + o.radius) {
+            destroyed = true;
+            o.vel.multiplyScalar(-0.7);
+            break;
+          }
+        }
+
+        // Tranché au Sabre Néon ou frappé à la main par le joueur !
+        if (!destroyed) {
+          for (const h of xrHandsData) {
+            if (h.worldPos.distanceTo(ePos) < e.radius + 0.16 || (h.saberBlade.visible && h.bladeTipWorld.distanceTo(ePos) < e.radius + 0.28)) {
+              destroyed = true;
               break;
             }
           }
-        });
-      }
+        }
 
-      // 5. Animation du Planétarium Tactile
-      if (solarGroup.visible) {
-        solarPlanets.forEach(p => {
-          p.mesh.rotation.y += dt * 0.8;
-          if (p.spec.dist > 0) {
-            p.angle += dt * p.spec.speed * 0.5;
-            p.mesh.position.set(
-              Math.cos(p.angle) * p.spec.dist,
-              Math.sin(p.angle * 2) * 0.04,
-              Math.sin(p.angle) * p.spec.dist
-            );
-          }
-        });
-      }
-
-      // 6. Particules d'explosion 3D
-      for (let i = explosionParticles.length - 1; i >= 0; i--) {
-        const ep = explosionParticles[i];
-        ep.life -= dt * 1.8;
-        if (ep.life <= 0) {
-          scene.remove(ep.mesh);
-          ep.mesh.geometry.dispose();
-          explosionParticles.splice(i, 1);
-        } else {
-          ep.vel.y -= 4.5 * dt;
-          ep.mesh.position.addScaledVector(ep.vel, dt);
-          ep.mesh.scale.setScalar(ep.life);
+        if (destroyed) {
+          addGameScore(100, ePos, e.colorHex);
+          // Respawn dynamique à une nouvelle position dans la chambre
+          e.group.position.set(
+            (Math.random() - 0.5) * 2.2,
+            0.95 + Math.random() * 0.95,
+            -0.75 - Math.random() * 1.0
+          );
         }
       }
 
-      // 7. Rendu Final
+      // 7. Mise à jour du Boss Titan (Level 4)
+      if (bossGroup.visible) {
+        bossBody.rotation.y += dt * 0.8;
+        bossBody.rotation.x += dt * 0.5;
+        bossShieldRing1.rotation.z += dt * 1.8;
+        bossShieldRing2.rotation.y -= dt * 1.5;
+        bossGroup.position.x = Math.sin(timeSec * 0.9) * 0.55;
+
+        const bPos = bossGroup.position;
+        for (const o of physObjects) {
+          if (o.vel.length() > 2.0 && o.mesh.position.distanceTo(bPos) < 0.65) {
+            game.bossHP = Math.max(0, game.bossHP - 125);
+            o.vel.z = Math.abs(o.vel.z) * 0.9;
+            addGameScore(150, bPos, 0xff007f);
+            if (game.bossHP <= 0) {
+              spawnVividExplosion(bPos, 0xffbe0b, 65);
+              playSFX('level_up');
+              render3DHoloHUD(null, '🏆 VICTOIRE TOTALE ! BOSS VAINCU !');
+              game.bossHP = game.bossMaxHP;
+            }
+          }
+        }
+      }
+
+      // 8. Animation des Ondes d'impact sur les murs & Particules Vivid
+      for (let i = wallRipples.length - 1; i >= 0; i--) {
+        const r = wallRipples[i];
+        r.scale += dt * 6.5;
+        r.alpha -= dt * 2.2;
+        if (r.alpha <= 0) {
+          scene.remove(r.mesh);
+          r.mesh.geometry.dispose();
+          wallRipples.splice(i, 1);
+        } else {
+          r.mesh.scale.setScalar(r.scale);
+          r.mesh.material.opacity = r.alpha;
+        }
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.life -= dt * 1.8;
+        if (p.life <= 0) {
+          scene.remove(p.mesh);
+          p.mesh.geometry.dispose();
+          particles.splice(i, 1);
+        } else {
+          p.vel.y -= 4.0 * dt;
+          p.mesh.position.addScaledVector(p.vel, dt);
+          p.mesh.scale.setScalar(p.life);
+        }
+      }
+
+      // 9. Rendu Final
       if (!renderer.xr.isPresenting) {
         controls.update();
         const stg = document.getElementById('stage');
